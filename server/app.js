@@ -103,8 +103,13 @@ app.post(
   "/save-application-info",
   upload.fields([
     { name: "transaction_slip", maxCount: 1 },
-    { name: "self_attested_copies", maxCount: 1 },
+    { name: "exam_result_pdf", maxCount: 1 },
     { name: "signature", maxCount: 1 },
+    { name: "publications_pdf", maxCount: 1 },
+    { name: "noc_pdf", maxCount: 1 },
+    { name: "resume_pdf", maxCount: 1 },
+    { name: "letter_PI_pdf", maxCount: 1 },
+    { name: "sop_pdf", maxCount: 1 },
   ]),
   applicantdB.save_application_info
 );
@@ -113,8 +118,13 @@ app.post(
   "/reapply-save-application-info",
   upload.fields([
     { name: "transaction_slip", maxCount: 1 },
-    { name: "self_attested_copies", maxCount: 1 },
+    { name: "exam_result_pdf", maxCount: 1 },
     { name: "signature", maxCount: 1 },
+    { name: "publications_pdf", maxCount: 1 },
+    { name: "noc_pdf", maxCount: 1 },
+    { name: "resume_pdf", maxCount: 1 },
+    { name: "letter_PI_pdf", maxCount: 1 },
+    { name: "sop_pdf", maxCount: 1 },
   ]),
   applicantdB.reapply_save_application_info
 );

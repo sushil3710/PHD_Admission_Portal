@@ -1,3 +1,4 @@
+-- Active: 1680511007825@@127.0.0.1@5432@mtech@public
 CREATE TABLE signup_verification (
     email_id TEXT PRIMARY KEY,
     hashed_otp TEXT,
@@ -185,3 +186,4 @@ INSERT INTO admins(name, email_id, admin_type, department) VALUES('Rohit', '2020
 INSERT INTO admins(name, email_id, admin_type, department) VALUES('Sushil', '2020csb1132@iitrpr.ac.in', 0, '{Academics}');
 INSERT INTO admins(name, email_id, admin_type, department) VALUES('Shruti', '2020csb1128@iitrpr.ac.in', 0, '{Academics}');
 INSERT INTO admins(name, email_id, admin_type, department) VALUES('tanish', '2020csb1133@iitrpr.ac.in', 0, '{Academics}');
+

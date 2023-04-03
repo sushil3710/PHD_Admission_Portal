@@ -63,7 +63,7 @@ const add_admission_cycle = async (req, res) => {
     "CREATE TABLE applications_" +
     new_cycle_id +
     " (application_id SERIAL, \
-    offering_id INT, email_id TEXT, status INT, status_remark TEXT, \
+    offering_id INT,department_name TEXT, specialization_name TEXT, applying_for TEXT,mode_of_app TEXT, email_id TEXT, status INT, status_remark TEXT, \
     full_name TEXT,guardian TEXT, fathers_name TEXT, profile_image_url TEXT, date_of_birth TEXT, \
     aadhar_card_number TEXT, category TEXT, category_certificate_url TEXT, \
     is_pwd TEXT,pwd_type TEXT,pwd_url TEXT,blood_group TEXT, marital_status TEXT,spouse_name TEXT,spouse_occupation TEXT, nationality TEXT, gender TEXT,advertisement TEXT, \
@@ -81,13 +81,15 @@ const add_admission_cycle = async (req, res) => {
     other_remarks TEXT, is_last_degree_completed TEXT, \
     amount TEXT, transaction_id TEXT, bank TEXT, \
     transaction_slip_url TEXT, date_of_transaction TEXT, \
-    qualifying_examination TEXT, branch_code TEXT, year TEXT, \
-    gate_enrollment_number TEXT, coap_registeration_number TEXT, \
-    all_india_rank TEXT, gate_score TEXT, valid_upto TEXT, \
-    self_attested_copies_url TEXT, remarks TEXT, \
-    signature_url TEXT, date_of_declaration TEXT, place_of_declaration TEXT, \
-    is_sponsored_applicant TEXT, name_of_sponsoring_org TEXT, name_of_working_org TEXT, address_of_org TEXT, \
-    designation TEXT, post_type TEXT, duration_post_start TEXT, duration_post_end TEXT, years_of_service TEXT, \
+    qualifying_examination_1 TEXT ,branch_code_1 TEXT , year_1 TEXT,valid_upto_1 TEXT ,all_india_rank_1 TEXT ,score_1 TEXT , \
+    qualifying_examination_2 TEXT ,branch_code_2 TEXT , year_2 TEXT,valid_upto_2 TEXT ,all_india_rank_2 TEXT ,score_2 TEXT , \
+    qualifying_examination_3 TEXT ,branch_code_3 TEXT , year_3 TEXT,valid_upto_3 TEXT ,all_india_rank_3 TEXT ,score_3 TEXT , \
+    date_of_declaration TEXT, place_of_declaration TEXT,\
+    name_of_working_org_1 TEXT ,designation_1 TEXT ,duration_post_start_1 TEXT ,duration_post_end_1 TEXT,nature_of_work_1 TEXT,\
+    name_of_working_org_2 TEXT ,designation_2 TEXT ,duration_post_start_2 TEXT ,duration_post_end_2 TEXT,nature_of_work_2 TEXT,total_years_of_service TEXT ,\
+    IEEE_ACM_Springer_journals TEXT ,natn_itnl_journals TEXT,US_patents TEXT ,Indian_patents TEXT,details_research_work TEXT,stat_of_purpose TEXT,\
+    interdisciplinary_prog_check TEXT,interdisciplinary_prog_name TEXT, area_of_research TEXT, first_pref TEXT, second_pref TEXT, third_pref TEXT, fourth_pref TEXT, specific_research_area TEXT, bachelor_degree_complete TEXT, PI_Project_Number TEXT, \
+    signature_url TEXT,exam_result_pdf TEXT,publications_pdf TEXT,noc_pdf TEXT,resume_pdf TEXT,letter_PI_pdf TEXT,sop_pdf TEXT,\
     CONSTRAINT fk_email FOREIGN KEY(email_id) REFERENCES applicants(email_id), \
     CONSTRAINT fk_offering FOREIGN KEY(offering_id) REFERENCES phd_offerings_" +
     new_cycle_id +

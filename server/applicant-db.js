@@ -508,17 +508,24 @@ const save_application_info = async (req, res, next) => {
   const app_save_result = await pool.query(
     "INSERT INTO applications_" +
     cycle_id +
-    "(email_id, amount, transaction_id, bank, date_of_transaction, qualifying_examination, \
-                    branch_code, year, gate_enrollment_number, coap_registeration_number, all_india_rank, gate_score, valid_upto, \
-                    remarks, date_of_declaration, place_of_declaration, offering_id, status, status_remark,is_sponsored_applicant, name_of_sponsoring_org, name_of_working_org , address_of_org,\
-                    designation, post_type, duration_post_start, duration_post_end, years_of_service) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
-                    $13, $14, $15, $16, $17, 1, '',$18,$19,$20,$21,$22,$23,$24,$25,$26) RETURNING application_id;",
+    "(email_id, amount, transaction_id, bank, date_of_transaction, \
+        qualifying_examination_1,branch_code_1, year_1,valid_upto_1,all_india_rank_1,score_1, \
+        qualifying_examination_2,branch_code_2, year_2,valid_upto_2,all_india_rank_2,score_2, \
+        qualifying_examination_3,branch_code_3, year_3,valid_upto_3,all_india_rank_3,score_3, \
+        date_of_declaration, place_of_declaration,\
+        name_of_working_org_1,designation_1,duration_post_start_1,duration_post_end_1,nature_of_work_1,\
+        name_of_working_org_2,designation_2,duration_post_start_2,duration_post_end_2,nature_of_work_2,total_years_of_service,\
+        IEEE_ACM_Springer_journals,natn_itnl_journals,US_patents,Indian_patents,details_research_work,stat_of_purpose,\
+        interdisciplinary_prog_check,mode_of_app,area_of_research,first_pref,second_pref,third_pref,fourth_pref,specific_research_area,bachelor_degree_complete,PI_Project_Number,\
+        department_name, specialization_name, applying_for, offering_id,interdisciplinary_prog_name, status, status_remark) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12,$13,$14,$15,$16, $17 ,$18 ,$19 ,$20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, \
+        $42, $43, $44, $45, $46, $47,$48,$49,$50,$51,$52,$53,$54,$55,$56,$57, 1, '') RETURNING application_id;",
     [
       email,
       app_details[1],
       app_details[2],
       app_details[3],
-      app_details[5],
+      app_details[4],
+      app_details[5],//qualifying exam_1
       app_details[6],
       app_details[7],
       app_details[8],
@@ -527,19 +534,49 @@ const save_application_info = async (req, res, next) => {
       app_details[11],
       app_details[12],
       app_details[13],
+      app_details[14],
       app_details[15],
-      app_details[19],
+      app_details[16],
+      app_details[17],
       app_details[18],
+      app_details[19],
       app_details[20],
       app_details[21],
       app_details[22],
-      app_details[23],
+      app_details[23],//date_of_declaration
       app_details[24],
       app_details[25],
       app_details[26],
       app_details[27],
       app_details[28],
       app_details[29],
+      app_details[30],
+      app_details[31],
+      app_details[32],
+      app_details[33],
+      app_details[34],
+      app_details[35],
+      app_details[36],//IEEE
+      app_details[37],
+      app_details[38],
+      app_details[39],
+      app_details[40],
+      app_details[41],
+      app_details[42],
+      app_details[43],
+      app_details[44],
+      app_details[45],
+      app_details[46],
+      app_details[47],
+      app_details[48],
+      app_details[49],
+      app_details[50],
+      app_details[51],
+      app_details[52],
+      app_details[53],
+      app_details[54],
+      app_details[55],
+      app_details[65],
     ]
   );
 
@@ -568,7 +605,7 @@ const save_application_info = async (req, res, next) => {
     ".email_id = a.email_id AND applications_" +
     cycle_id +
     ".offering_id = $2;",
-    [email, app_details[20]]
+    [email, app_details[55]]
   );
 
   let promises = [];
@@ -604,11 +641,11 @@ const save_application_info = async (req, res, next) => {
               " SET transaction_slip_url = $1 WHERE email_id = $2;",
               [url, email]
             );
-          } else if (f[0].fieldname === "self_attested_copies") {
+          } else if (f[0].fieldname === "exam_result_pdf") {
             await pool.query(
               "UPDATE applications_" +
               cycle_id +
-              " SET self_attested_copies_url = $1 WHERE email_id = $2;",
+              " SET exam_result_pdf = $1 WHERE email_id = $2;",
               [url, email]
             );
           } else if (f[0].fieldname === "signature") {
@@ -616,6 +653,41 @@ const save_application_info = async (req, res, next) => {
               "UPDATE applications_" +
               cycle_id +
               " SET signature_url = $1 WHERE email_id = $2;",
+              [url, email]
+            );
+          } else if (f[0].fieldname === "publications_pdf") {
+            await pool.query(
+              "UPDATE applications_" +
+              cycle_id +
+              " SET publications_pdf = $1 WHERE email_id = $2;",
+              [url, email]
+            );
+          } else if (f[0].fieldname === "noc_pdf") {
+            await pool.query(
+              "UPDATE applications_" +
+              cycle_id +
+              " SET noc_pdf = $1 WHERE email_id = $2;",
+              [url, email]
+            );
+          } else if (f[0].fieldname === "resume_pdf") {
+            await pool.query(
+              "UPDATE applications_" +
+              cycle_id +
+              " SET resume_pdf = $1 WHERE email_id = $2;",
+              [url, email]
+            );
+          } else if (f[0].fieldname === "letter_PI_pdf") {
+            await pool.query(
+              "UPDATE applications_" +
+              cycle_id +
+              " SET letter_PI_pdf = $1 WHERE email_id = $2;",
+              [url, email]
+            );
+          } else if (f[0].fieldname === "sop_pdf") {
+            await pool.query(
+              "UPDATE applications_" +
+              cycle_id +
+              " SET sop_pdf = $1 WHERE email_id = $2;",
               [url, email]
             );
           }
@@ -633,7 +705,7 @@ const save_application_info = async (req, res, next) => {
     "SELECT department, specialization FROM phd_offerings_" +
     cycle_id +
     " WHERE offering_id = $1",
-    [app_details[20]]
+    [app_details[55]]
   );
   let dep = offering_details.rows[0].department;
   let spec = offering_details.rows[0].specialization;
@@ -964,17 +1036,24 @@ const reapply_save_application_info = async (req, res, next) => {
   const app_save_result = await pool.query(
     "INSERT INTO applications_" +
     cycle_id +
-    "(email_id, amount, transaction_id, bank, date_of_transaction, qualifying_examination, \
-                    branch_code, year, gate_enrollment_number, coap_registeration_number, all_india_rank, gate_score, valid_upto, \
-                    remarks, date_of_declaration, place_of_declaration, offering_id, status, status_remark,is_sponsored_applicant, name_of_sponsoring_org, name_of_working_org , address_of_org,\
-                    designation, post_type, duration_post_start, duration_post_end, years_of_service) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, \
-                    $13, $14, $15, $16, $17, 1, '',$18,$19,$20,$21,$22,$23,$24,$25,$26) RETURNING application_id;",
+    "(email_id, amount, transaction_id, bank, date_of_transaction, \
+        qualifying_examination_1,branch_code_1, year_1,valid_upto_1,all_india_rank_1,score_1, \
+        qualifying_examination_2,branch_code_2, year_2,valid_upto_2,all_india_rank_2,score_2, \
+        qualifying_examination_3,branch_code_3, year_3,valid_upto_3,all_india_rank_3,score_3, \
+        date_of_declaration, place_of_declaration,\
+        name_of_working_org_1,designation_1,duration_post_start_1,duration_post_end_1,nature_of_work_1,\
+        name_of_working_org_2,designation_2,duration_post_start_2,duration_post_end_2,nature_of_work_2,total_years_of_service,\
+        IEEE_ACM_Springer_journals,natn_itnl_journals,US_patents,Indian_patents,details_research_work,stat_of_purpose,\
+        interdisciplinary_prog_check,mode_of_app,area_of_research,first_pref,second_pref,third_pref,fourth_pref,specific_research_area,bachelor_degree_complete,PI_Project_Number,\
+        department_name, specialization_name, applying_for, offering_id,interdisciplinary_prog_name, status, status_remark) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12,$13,$14,$15,$16, $17 ,$18 ,$19 ,$20, $21, $22, $23, $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36, $37, $38, $39, $40, $41, \
+        $42, $43, $44, $45, $46, $47,$48,$49,$50,$51,$52,$53,$54,$55,$56,$57, 1, '') RETURNING application_id;",
     [
       email,
       app_details[1],
       app_details[2],
       app_details[3],
-      app_details[5],
+      app_details[4],
+      app_details[5],//qualifying exam_1
       app_details[6],
       app_details[7],
       app_details[8],
@@ -983,19 +1062,49 @@ const reapply_save_application_info = async (req, res, next) => {
       app_details[11],
       app_details[12],
       app_details[13],
+      app_details[14],
       app_details[15],
-      app_details[19],
+      app_details[16],
+      app_details[17],
       app_details[18],
+      app_details[19],
       app_details[20],
       app_details[21],
       app_details[22],
-      app_details[23],
+      app_details[23],//date_of_declaration
       app_details[24],
       app_details[25],
       app_details[26],
       app_details[27],
       app_details[28],
       app_details[29],
+      app_details[30],
+      app_details[31],
+      app_details[32],
+      app_details[33],
+      app_details[34],
+      app_details[35],
+      app_details[36],//IEEE
+      app_details[37],
+      app_details[38],
+      app_details[39],
+      app_details[40],
+      app_details[41],
+      app_details[42],
+      app_details[43],
+      app_details[44],
+      app_details[45],
+      app_details[46],
+      app_details[47],
+      app_details[48],
+      app_details[49],
+      app_details[50],
+      app_details[51],
+      app_details[52],
+      app_details[53],
+      app_details[54],
+      app_details[55],
+      app_details[65],
     ]
   );
 
@@ -1024,7 +1133,7 @@ const reapply_save_application_info = async (req, res, next) => {
     ".email_id = a.email_id AND applications_" +
     cycle_id +
     ".offering_id = $2;",
-    [email, app_details[20]]
+    [email, app_details[55]]
   );
 
 
@@ -1050,7 +1159,7 @@ const reapply_save_application_info = async (req, res, next) => {
             return;
           }
           url = format(
-            `http://localhost:8080/MtechAdmissions/REAPPLY_Details/${filename}`
+            `http://localhost:8080/MtechAdmissions/APPLICATION_Details/${filename}`
 
           );
           if (f[0].fieldname === "transaction_slip") {
@@ -1060,11 +1169,11 @@ const reapply_save_application_info = async (req, res, next) => {
               " SET transaction_slip_url = $1 WHERE email_id = $2;",
               [url, email]
             );
-          } else if (f[0].fieldname === "self_attested_copies") {
+          } else if (f[0].fieldname === "exam_result_pdf") {
             await pool.query(
               "UPDATE applications_" +
               cycle_id +
-              " SET self_attested_copies_url = $1 WHERE email_id = $2;",
+              " SET exam_result_pdf = $1 WHERE email_id = $2;",
               [url, email]
             );
           } else if (f[0].fieldname === "signature") {
@@ -1074,9 +1183,45 @@ const reapply_save_application_info = async (req, res, next) => {
               " SET signature_url = $1 WHERE email_id = $2;",
               [url, email]
             );
+          } else if (f[0].fieldname === "publications_pdf") {
+            await pool.query(
+              "UPDATE applications_" +
+              cycle_id +
+              " SET publications_pdf = $1 WHERE email_id = $2;",
+              [url, email]
+            );
+          } else if (f[0].fieldname === "noc_pdf") {
+            await pool.query(
+              "UPDATE applications_" +
+              cycle_id +
+              " SET noc_pdf = $1 WHERE email_id = $2;",
+              [url, email]
+            );
+          } else if (f[0].fieldname === "resume_pdf") {
+            await pool.query(
+              "UPDATE applications_" +
+              cycle_id +
+              " SET resume_pdf = $1 WHERE email_id = $2;",
+              [url, email]
+            );
+          } else if (f[0].fieldname === "letter_PI_pdf") {
+            await pool.query(
+              "UPDATE applications_" +
+              cycle_id +
+              " SET letter_PI_pdf = $1 WHERE email_id = $2;",
+              [url, email]
+            );
+          } else if (f[0].fieldname === "sop_pdf") {
+            await pool.query(
+              "UPDATE applications_" +
+              cycle_id +
+              " SET sop_pdf = $1 WHERE email_id = $2;",
+              [url, email]
+            );
           }
 
-            resolve();
+          resolve();
+
         });
       })
     );
@@ -1088,7 +1233,7 @@ const reapply_save_application_info = async (req, res, next) => {
     "SELECT department, specialization FROM phd_offerings_" +
     cycle_id +
     " WHERE offering_id = $1",
-    [app_details[20]]
+    [app_details[55]]
   );
   let dep = offering_details.rows[0].department;
   let spec = offering_details.rows[0].specialization;

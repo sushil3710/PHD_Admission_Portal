@@ -79,8 +79,7 @@ export default function EditOfferingModal(props) {
     formData.append("offering_id", props.application.offering_id);
     formData.append("department", data.department);
     formData.append("specialization", data.specialization);
-    formData.append("seats", data.seats);
-    formData.append("gate_paper_codes", data.gate_paper_codes);
+    formData.append("offering_type", data.offering_type);
     formData.append("eligibility", data.eligibility);
     formData.append("deadline", data.deadline);
     formData.append("is_accepting_applications", applicationChecked);
@@ -202,35 +201,24 @@ export default function EditOfferingModal(props) {
                     </div>
                     <div className="col-span-full sm:col-span-full">
                       <label
-                        htmlFor="gate_paper_codes"
+                        htmlFor="offering_type"
                         className="text-sm font-medium text-gray-900 block mb-2"
                       >
-                        GATE Paper Codes
+                        Offering Type
+                        <select
+                          id="offering_type"
+                          name="offering_type"
+                          {...register("offering_type")}
+                          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                          required
+                        >
+                          <option value="">None</option>
+                          <option value="Regular/External/Part Time">Regular/External/Part Time</option>
+                          <option value="Direct">Direct</option>
+                          <option value="Staff Member">Staff Member</option>
+                          <option value="Project Staff">Project Staff</option>
+                        </select>
                       </label>
-                      <input
-                        type="text"
-                        {...register("gate_paper_codes")}
-                        id="gate_paper_codes"
-                        pattern="([A-Z]+, *)*[A-Z]+$"
-                        title="Comma-separated Gate codes(in capital alphabets)"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                        required
-                      />
-                    </div>
-                    <div className="col-span-6 sm:col-span-3">
-                      <label
-                        htmlFor="seats"
-                        className="text-sm font-medium text-gray-900 block mb-2"
-                      >
-                        Seats
-                      </label>
-                      <input
-                        type="text"
-                        {...register("seats")}
-                        id="seats"
-                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
-                        required
-                      />
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">

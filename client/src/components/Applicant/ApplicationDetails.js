@@ -10,7 +10,8 @@ import { getToken } from "../SignIn_SignUp/Sessions";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import screenSpinner from "../../images/2300-spinner.gif";
-import SponsorshipDetails from "./SponsorshipDetails.js";
+import ExperienceAndPublications from "./ExperienceAndPublications.js";
+import GeneralApplicationDetails from "./GeneralApplicationDetails";
 
 function ApplicantionDetails() {
   const navigate = useNavigate();
@@ -36,15 +37,7 @@ function ApplicantionDetails() {
     date = date.getFullYear() + "-0" + month + "-" + day;
     return date;
   }
-  const init_application_details = () => {
-    const array = Array.from({ length: 30 }, () => "");
-
-    array[6] = "GATE";
-    array[5] = changeDateFormat();
-    array[19] = changeDateFormat();
-    array[20] = params.offering_id;
-    return array;
-  };
+  
 
   useEffect(() => {
     Axios.get("/check-applicant-info", {
@@ -84,6 +77,23 @@ function ApplicantionDetails() {
       })
       .catch((err) => console.log(err));
   }, []);
+
+
+  const init_application_details = () => {
+    const array = Array.from({ length: 66 }, () => "");
+
+    array[4] = changeDateFormat();
+    array[23] = changeDateFormat();
+    array[27] = changeDateFormat();
+    array[28] = changeDateFormat();
+    array[32] = changeDateFormat();
+    array[33] = changeDateFormat();
+    array[52] = offering.department;
+    array[53] = offering.specialization;
+    array[54] = offering.offering_type;
+    array[55] = params.offering_id;
+    return array;
+  };
 
   const [applicant_details, setApplicantDetails] = useState(
     init_application_details()
@@ -152,9 +162,14 @@ function ApplicantionDetails() {
     const formData = new FormData();
 
     formData.append("applicant_details", JSON.stringify(applicant_details));
-    formData.append("transaction_slip", applicant_details[4]);
-    formData.append("self_attested_copies", applicant_details[14]);
-    formData.append("signature", applicant_details[17]);
+    formData.append("signature", applicant_details[57]);
+    formData.append("exam_result_pdf", applicant_details[58]);
+    formData.append("transaction_slip", applicant_details[59]);
+    formData.append("publications_pdf", applicant_details[60]);
+    formData.append("noc_pdf", applicant_details[61]);
+    formData.append("resume_pdf", applicant_details[62]);
+    formData.append("letter_PI_pdf", applicant_details[63]);
+    formData.append("sop_pdf", applicant_details[64]);
 
     Axios.post("/save-application-info", formData, {
       headers: {
@@ -194,9 +209,10 @@ function ApplicantionDetails() {
           <div className="grid grid-cols-12 gap-2">
             <div className="mx-12 mb-12 mt-10 px-12 col-start-1 col-end-12">
               <ChevronDots
-                steps={[
+                  steps={[
+                  "General Application Details",
                   "Qualifying Exam Details",
-                  "Sponsorship Details",
+                  "Experiences and Publications",
                   "Application Fee Details",
                   "Declaration",
                   "Review",
@@ -225,8 +241,19 @@ function ApplicantionDetails() {
           </div>
 
           {
-            {
-              1: (
+              {
+                1: (
+                  <GeneralApplicationDetails
+                    increasePageNumber={increasePageNumber}
+                    decreasePageNumber={decreasePageNumber}
+                    offering={offering}
+                    details={applicant_details}
+                    onChange={handleApplicantDetailsChange}
+                    handleFileSubmit={handleFileSubmit}
+                    emptyFileIndex={emptyFileIndex}
+                  />
+                ),
+                2: (
                 <QualifyingExamDetails
                   hasFilledHighestGate={hasFilledHighestGate}
                   setHasFilledHighestGate={setHasFilledHighestGate}
@@ -240,17 +267,18 @@ function ApplicantionDetails() {
                   emptyFileIndex={emptyFileIndex}
                 />
                 ),
-                2: (
-                  <SponsorshipDetails
+                3: (
+                  <ExperienceAndPublications
                     increasePageNumber={increasePageNumber}
                     decreasePageNumber={decreasePageNumber}
+                    offering={offering}
                     details={applicant_details}
                     onChange={handleApplicantDetailsChange}
                     handleFileSubmit={handleFileSubmit}
                     emptyFileIndex={emptyFileIndex}
                   />
                 ),
-              3: (
+              4: (
                 <ApplicationFeeDetails
                   category={category}
                   increasePageNumber={increasePageNumber}
@@ -262,7 +290,7 @@ function ApplicantionDetails() {
                   categoryFees={categoryFees}
                 />
               ),
-              4: (
+              5: (
                 <Declaration
                   full_name={full_name}
                   increasePageNumber={increasePageNumber}
@@ -273,7 +301,7 @@ function ApplicantionDetails() {
                   emptyFileIndex={emptyFileIndex}
                 />
               ),
-              5: (
+              6: (
                 <Review
                   offering={offering}
                   decreasePageNumber={decreasePageNumber}

@@ -48,11 +48,11 @@ function Declaration(props) {
                           type="text"
                           name="full_name"
                           id="full_name"
-                          required
+                          
                           pattern={props.full_name}
                           title="Please match your full name that you have entered in your profile."
-                          value={props.details[16]}
-                          onChange={(e) => props.onChange(e, 16)}
+                          value={props.details[56]}
+                          onChange={(e) => props.onChange(e, 56)}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
@@ -66,7 +66,7 @@ function Declaration(props) {
                           <span style={{ color: "#ff0000" }}> *</span>
                         </label>
 
-                        {!props.details[17].name ? (
+                        {!props.details[57].name ? (
                           <>
                             <input
                               className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
@@ -74,10 +74,10 @@ function Declaration(props) {
                               id="signature"
                               name="signature"
                               type="file"
-                              required
+                              
                               accept=".png, .jpeg, .jpg, .gif"
                               onChange={(e) =>
-                                props.handleFileSubmit(e, 1, 17, 3)
+                                props.handleFileSubmit(e, 1, 57, 3)
                               }
                             />
 
@@ -117,16 +117,16 @@ function Declaration(props) {
                                 id="signature"
                                 name="signature"
                                 type="text"
-                                value={props.details[17].name}
+                                value={props.details[57].name}
                                 // ref={props.ref}
-                                required
+                                
                                 readOnly
                               />
 
                               <button
                                 type="button"
                                 className="flex items-center ml-2 mr-2 justify-center"
-                                onClick={() => props.emptyFileIndex(17)}
+                                onClick={() => props.emptyFileIndex(57)}
                               >
                                 <img
                                   className="w-6 h-6"
@@ -150,16 +150,16 @@ function Declaration(props) {
                           type="text"
                           name="place"
                           id="place"
-                          value={props.details[18]}
-                          onChange={(e) => props.onChange(e, 18)}
-                          required
+                          value={props.details[24]}
+                          onChange={(e) => props.onChange(e, 24)}
+                          
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
                         <label
-                          htmlFor="date-of-birth"
+                          htmlFor="date-of-declaration"
                           className="block text-sm font-medium text-gray-700"
                         >
                           Date
@@ -170,7 +170,7 @@ function Declaration(props) {
                           name="date"
                           type="date"
                           disabled={true}
-                          value={props.details[19]}
+                          value={props.details[23]}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
