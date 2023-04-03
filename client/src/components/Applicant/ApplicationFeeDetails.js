@@ -136,7 +136,7 @@ function ApplicationFeeDetails(props) {
                               
                               accept=".pdf, .jpeg, .jpg"
                               onChange={(e) =>
-                                props.handleFileSubmit(e,59, 4, 2)
+                                props.handleFileSubmit(e,2, 59, 2)
                               }
                             />
                             <div

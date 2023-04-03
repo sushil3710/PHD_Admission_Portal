@@ -174,12 +174,6 @@ export default function OfferingList() {
                   >
                     <option value="full_name">Applicant Name</option>
                     <option value="email_id">Email Address</option>
-                    <option value="coap_registeration_number">
-                      COAP Registration Number
-                    </option>
-                    <option value="gate_enrollment_number">
-                      GATE Registration Number
-                    </option>
                   </select>
                 </div>
               </div>
@@ -296,31 +290,6 @@ export default function OfferingList() {
                       scope="col"
                       className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
                     >
-                      COAP Registration Number
-                    </th>
-                    <th
-                      scope="col"
-                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
-                    >
-                      GATE Registration Number
-                    </th>
-                    <th
-                      scope="col"
-                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
-                    >
-                      GATE Score
-                    </th>
-
-                    <th
-                      scope="col"
-                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
-                    >
-                      AIR
-                    </th>
-                    <th
-                      scope="col"
-                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
-                    >
                       Status
                     </th>
                     <th scope="col" className="p-4"></th>
@@ -345,18 +314,6 @@ export default function OfferingList() {
                           <div className="w-full break-all">
                             {applications[i].email_id}
                           </div>
-                        </td>
-                        <td className="p-4 text-left text-sm text-gray-500 tracking-wider">
-                          {applications[i].coap_registeration_number}
-                        </td>
-                        <td className="p-4 text-left text-sm text-gray-500 tracking-wider">
-                          {applications[i].gate_enrollment_number}
-                        </td>
-                        <td className="p-4 text-left text-sm text-gray-500 tracking-wider">
-                          {applications[i].gate_score}
-                        </td>
-                        <td className="p-4 text-left text-sm text-gray-500 tracking-wider">
-                          {applications[i].all_india_rank}
                         </td>
                         <td className="p-4 text-left text-sm text-gray-500 tracking-wider"></td>
                         <td className="p-6 whitespace-nowrap space-x-2 flex">

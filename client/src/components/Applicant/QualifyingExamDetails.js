@@ -88,37 +88,36 @@ function QualifyingExamDetails(props) {
                             <select
                               id="branch_code_1"
                               name="branch_code_1"
-                              
                               value={props.details[6]}
                               onChange={(e) => props.onChange(e, 6)}
                               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             >
                               <option value="">Select</option>
-                              <option value="">AE</option>
-                              <option value="">IN</option>
-                              <option value="">AG</option>
-                              <option value="">ME</option>
-                              <option value="">BM</option>
-                              <option value="">MN</option>
-                              <option value="">BT</option>
-                              <option value="">MT</option>
-                              <option value="">CE</option>
-                              <option value="">PE</option>
-                              <option value="">CH</option>
-                              <option value="">PH</option>
-                              <option value="">CS</option>
-                              <option value="">PI</option>
-                              <option value="">CY</option>
-                              <option value="">ST</option>
-                              <option value="">EC</option>
-                              <option value="">TF</option>
-                              <option value="">EE</option>
-                              <option value="">XE*</option>
-                              <option value="">ES</option>
-                              <option value="">XH**</option>
-                              <option value="">EY</option>
-                              <option value="">XL**</option>
-                              <option value="">GG</option>
+                              <option value="AE">AE</option>
+                              <option value="IN">IN</option>
+                              <option value="AG">AG</option>
+                              <option value="ME">ME</option>
+                              <option value="BM">BM</option>
+                              <option value="MN">MN</option>
+                              <option value="BT">BT</option>
+                              <option value="MT">MT</option>
+                              <option value="CE">CE</option>
+                              <option value="PE">PE</option>
+                              <option value="CH">CH</option>
+                              <option value="PH">PH</option>
+                              <option value="CS">CS</option>
+                              <option value="PI">PI</option>
+                              <option value="CY">CY</option>
+                              <option value="CY">ST</option>
+                              <option value="EC">EC</option>
+                              <option value="TF">TF</option>
+                              <option value="EE">EE</option>
+                              <option value="XE*">XE*</option>
+                              <option value="ES">ES</option>
+                              <option value="XH**">XH**</option>
+                              <option value="EY">EY</option>
+                              <option value="XL**">XL**</option>
+                              <option value="GG">GG</option>
                             </select></>) :
                           (<>
                             <label
@@ -277,31 +276,31 @@ function QualifyingExamDetails(props) {
                               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             >
                               <option value="">Select</option>
-                              <option value="">AE</option>
-                              <option value="">IN</option>
-                              <option value="">AG</option>
-                              <option value="">ME</option>
-                              <option value="">BM</option>
-                              <option value="">MN</option>
-                              <option value="">BT</option>
-                              <option value="">MT</option>
-                              <option value="">CE</option>
-                              <option value="">PE</option>
-                              <option value="">CH</option>
-                              <option value="">PH</option>
-                              <option value="">CS</option>
-                              <option value="">PI</option>
-                              <option value="">CY</option>
-                              <option value="">ST</option>
-                              <option value="">EC</option>
-                              <option value="">TF</option>
-                              <option value="">EE</option>
-                              <option value="">XE*</option>
-                              <option value="">ES</option>
-                              <option value="">XH**</option>
-                              <option value="">EY</option>
-                              <option value="">XL**</option>
-                              <option value="">GG</option>
+                              <option value="AE">AE</option>
+                              <option value="IN">IN</option>
+                              <option value="AG">AG</option>
+                              <option value="ME">ME</option>
+                              <option value="BM">BM</option>
+                              <option value="MN">MN</option>
+                              <option value="BT">BT</option>
+                              <option value="MT">MT</option>
+                              <option value="CE">CE</option>
+                              <option value="PE">PE</option>
+                              <option value="CH">CH</option>
+                              <option value="PH">PH</option>
+                              <option value="CS">CS</option>
+                              <option value="PI">PI</option>
+                              <option value="CY">CY</option>
+                              <option value="CY">ST</option>
+                              <option value="EC">EC</option>
+                              <option value="TF">TF</option>
+                              <option value="EE">EE</option>
+                              <option value="XE*">XE*</option>
+                              <option value="ES">ES</option>
+                              <option value="XH**">XH**</option>
+                              <option value="EY">EY</option>
+                              <option value="XL**">XL**</option>
+                              <option value="GG">GG</option>
                             </select></>) :
                           (<>
                             <label
