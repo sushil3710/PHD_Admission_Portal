@@ -12,34 +12,14 @@ function SignInStartPage() {
 
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  // const [msg_otp, setMsgOtp] = useState(
-  //   "Enter Email and Password"
-  // );
+
   const [msg_signin, setMsgSignin] = useState(
     "Enter Email and Password"
   );
   const [colorEmail, setColorEmail] = useState(0);
   const [colorPass, setColorPass] = useState(0);
    const [isLoadingEmail, setIsLoadingEmail] = useState(false);
-  //const [isLoadingOTP, setIsLoadingOTP] = useState(false);
 
-  // const emailSubmit = () => {
-  //  // setIsLoadingEmail(true);
-  //   axios.post("/auth/signin/otp", { email: email }).then((response) => {
-  //     if (response.data === 0) {
-  //       setMsgSignin("Please enter your email.");
-  //       setColorEmail(1);
-  //       setIsLoadingEmail(false);
-  //     } else if (response.data === 1) {
-  //       setMsgSignin("You do not have an account. Sign-up first!");
-  //       setColorEmail(1);
-  //       setIsLoadingEmail(false);
-  //     } else {
-  //       setotpSent(!otpSent);
-  //       setColorOTP(2);
-  //     }
-  //   });
-  // };
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -48,15 +28,6 @@ function SignInStartPage() {
     setPass(e.target.value);
   };
 
-  // const updateOTP = (e) => {
-  //   setOtp(e.target.value);
-  // };
-
-  // const resendOTP = () => {
-  //   axios.post("/auth/signin/otp", { email: email });
-  //   setMsgOtp("OTP has been resent to your mail account.");
-  //   setColorOTP(2);
-  // };
 
   const handleSubmit = () => {
     console.log("handleSubmit called");

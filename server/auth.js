@@ -411,10 +411,8 @@ const applicant_row=result1.rows[0];
   
       const jwtSecretKey = process.env.JWT_SECRET_KEY;
       const authToken = jwt.sign(userData, jwtSecretKey);
-      
-
-      switch (admin_row.admin_type) {
-        
+    
+      switch (admin_row.admin_type) {   
         case 0:       
           return res.send({ result: 4, token: authToken, admin_type: 0 });
         case 1:

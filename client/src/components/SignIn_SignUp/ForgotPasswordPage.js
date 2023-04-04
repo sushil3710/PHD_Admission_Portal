@@ -3,6 +3,7 @@ import axios from "axios";
 import Otp from "./Otp";
 import { setUserSession } from "./Sessions";
 import { useNavigate, Link } from "react-router-dom";
+import { setAdminType } from "../Admin/AdminTypes";
 import ForgotPassword from "./ForgotPassword";
 
 function ForgotPasswordPage() {
@@ -89,9 +90,8 @@ function ForgotPasswordPage() {
           response.data.result === 5 ||
           response.data.result === 6
         ) {
-        
-        
           setUserSession(response.data.token);
+          setAdminType(response.data.admin_type);
           navigate("/admin/dashboard");
 
         } else if (response.data.result === 2) {
