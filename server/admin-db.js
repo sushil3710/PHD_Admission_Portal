@@ -651,8 +651,8 @@ const add_admin = async (req, res) => {
 
   /** Add email_id */
   const add = await pool.query(
-    "INSERT INTO admins(name, email_id, admin_type, department) VALUES($1, $2, $3, $4);",
-    [info.name, info.email_id, info.admin_type, JSON.parse(info.department)]
+    "INSERT INTO admins(name, email_id,passwd ,admin_type, department) VALUES($1, $2, $3, $4,$5);",
+    [info.name, info.email_id, info.password,info.admin_type, JSON.parse(info.department)]
   );
 
   return res.send("Ok");
@@ -693,8 +693,8 @@ const edit_admin = async (req, res) => {
 
   /** Edit admin_info */
   const edit = await pool.query(
-    "UPDATE admins SET name = $1, admin_type = $2, department = $3 WHERE email_id = $4;",
-    [info.name, info.admin_type, JSON.parse(info.department), info.email_id]
+    "UPDATE admins SET name = $1, passwd=$2,admin_type = $3, department = $4 WHERE email_id = $5;",
+    [info.name, info.password,info.admin_type, JSON.parse(info.department), info.email_id]
   );
 
   return res.send("Ok");

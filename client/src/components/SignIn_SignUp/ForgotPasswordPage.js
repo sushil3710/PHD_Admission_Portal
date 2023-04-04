@@ -14,10 +14,10 @@ function ForgotPasswordPage() {
   const [pass, setpass] = useState("");
   const [cnfpass, setcnfpass] = useState("");
   const [msg_otp, setMsgOtp] = useState(
-    "OTP has been sent to your mail account. Please check your spam folder also."
+    "OTP has been sent to your mail account. Please check your Mail"
   );
   const [msg_signin, setMsgSignin] = useState(
-    "An OTP will be sent to your email ID for verification."
+    "RESET Your Password Through OTP"
   );
   const [colorEmail, setColorEmail] = useState(0);
   const [colorOTP, setColorOTP] = useState(0);
@@ -77,11 +77,11 @@ function ForgotPasswordPage() {
       })
       .then((response) => {
         if(response.data.result===0){
-          setMsgSignin("Wrong OTP");
+          setMsgOtp("Wrong OTP");
           setColorPass(1);
-          setIsLoadingEmail(false);
+          setIsLoadingOTP(false);
         }
-        if (response.data.result === 1) {
+        else if (response.data.result === 1) {
           setUserSession(response.data.token);
           navigate("/home");
         } else if (
@@ -89,24 +89,26 @@ function ForgotPasswordPage() {
           response.data.result === 5 ||
           response.data.result === 6
         ) {
-       
+        
+        
           setUserSession(response.data.token);
           navigate("/admin/dashboard");
+
         } else if (response.data.result === 2) {
-          setMsgSignin("OTP Expired");
+          setMsgOtp("OTP Expired");
           setColorEmail(1);
           setColorPass(1);
-          setIsLoadingEmail(false);
+          setIsLoadingOTP(false);
          }
          else if(response.data.result===3){
-          setMsgSignin("Password do not Match");
+          setMsgOtp("Password do not Match");
           setColorPass(1);
-          setIsLoadingEmail(false);
+          setIsLoadingOTP(false);
         }
         else{
-          setMsgSignin("Unknown Error");
+          setMsgOtp("Unknown Error");
           setColorPass(1);
-          setIsLoadingEmail(false);
+          setIsLoadingOTP(false);
         }
       });
   };
@@ -116,12 +118,10 @@ function ForgotPasswordPage() {
       <div className="relative min-h-screen flex flex-col sm:justify-center items-center w-4/5 mx-auto sm:w-3/5 md:w-3/5">
         <div className="relative sm:max-w-md w-full">
           <div className="flex absolute justify-center items-center content-center bg-gradient-to-br from-[#6F8BD6] to-[#1E3A8A] shadow-md hover:shadow-lg h-48 w-48 -left-24 -top-24 rounded-full fill-current text-white">
-            <span className="relative -top-9 -left-21 font-josefin-sans text-2xl font-bold">
-              Forgot
-            </span>
-            <span className="relative -top-2 -left-20 font-josefin-sans text-2xl font-bold">
-              Password
-            </span>
+          <div style={{ position: 'relative', width: '6rem', height: '6rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'left' }}>
+      <span style={{ fontSize: '1.2rem', marginTop: '-6rem' }}>Forgot</span>
+      <span style={{ fontSize: '1.2rem', marginBottom: '-2rem' }}>Password</span>
+    </div>
           </div>
           <div className="card bg-[#1E3A8A] shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6" />
           <div className="card bg-[#6F8BD6] shadow-lg w-full h-full rounded-3xl absolute transform rotate-6" />

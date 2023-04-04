@@ -88,6 +88,7 @@ export default function AddAdminModal() {
 
     formData.append("name", data.name);
     formData.append("email_id", data.email_id);
+    formData.append("password", data.password);
     formData.append("admin_type", adminType);
     formData.append("department", JSON.stringify(filteredOptions));
 
@@ -212,7 +213,21 @@ export default function AddAdminModal() {
                         <></>
                       )}
                     </div>
-
+                    <div className="col-span-full sm:col-span-full">
+                      <label
+                        htmlFor="name"
+                        className="text-sm font-medium text-gray-900 block mb-2"
+                      >
+                        Password
+                      </label>
+                      <input
+                        type="password"
+                        {...register("password")}
+                        id="password"
+                        className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
+                        required
+                      />
+                    </div>
                     <div className="col-span-full sm:col-span-full">
                       <label
                         htmlFor="admin_type"

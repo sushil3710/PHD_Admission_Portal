@@ -348,7 +348,7 @@ const forgot_password_verify = async (req, res) => {
   const { email, otp,password,confirm_password } = req.body;
 
 
-  if (otp === "") return res.send({ result: 3 });
+  if (otp === "") return res.send({ result: 0 });
 
   /** encrypt and check for otp in db and return accordingly */
   const result = await pool.query(
@@ -382,7 +382,6 @@ const applicant_row=result1.rows[0];
 
   const match = await bcrypt.compare(otp, result_row.hashed_otp);
   if (match) {
-    //const hashedPassword = await bcrypt.hash(password, 10);
     if(applicant_row){
     await pool.query("update applicants set passwd=$1 where email_id=$2", [
        password, email
@@ -412,18 +411,18 @@ const applicant_row=result1.rows[0];
   
       const jwtSecretKey = process.env.JWT_SECRET_KEY;
       const authToken = jwt.sign(userData, jwtSecretKey);
+      
 
       switch (admin_row.admin_type) {
-        case 0:
-         
+        
+        case 0:       
           return res.send({ result: 4, token: authToken, admin_type: 0 });
         case 1:
-        
           return res.send({ result: 5, token: authToken, admin_type: 1 });
         case 3:
-        
           return res.send({ result: 6, token: authToken, admin_type: 3 });
         default:
+         
           return res.send({ result: 0 });
       }
 
