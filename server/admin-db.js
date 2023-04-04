@@ -1,6 +1,8 @@
 const pool = require("./db");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 dotenv.config();
 /** Add admission cycle and make it the current cycle */
