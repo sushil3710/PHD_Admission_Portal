@@ -41,8 +41,7 @@ function ExperienceAndPublications(props) {
                                                 <label
                                                     className="block text-sm font-medium text-gray-700"
                                                 >
-                                                    Name of the Organisation:
-                                                    <span style={{ color: "#ff0000" }}> *</span>
+                                                    Name of the Organisation
                                                 </label>
                                                 <input
                                                     type="text"
@@ -61,7 +60,7 @@ function ExperienceAndPublications(props) {
                                                 <label
                                                     className="block text-sm font-medium text-gray-700"
                                                 >
-                                                    Designation:
+                                                    Designation
                                                 </label>
                                                 <input
                                                     type="text"
@@ -149,8 +148,7 @@ function ExperienceAndPublications(props) {
                                                 <label
                                                     className="block text-sm font-medium text-gray-700"
                                                 >
-                                                    Name of the Organisation:
-                                                    <span style={{ color: "#ff0000" }}> *</span>
+                                                    Name of the Organisation
                                                 </label>
                                                 <input
                                                     type="text"
@@ -169,7 +167,7 @@ function ExperienceAndPublications(props) {
                                                 <label
                                                     className="block text-sm font-medium text-gray-700"
                                                 >
-                                                    Designation:
+                                                    Designation
                                                 </label>
                                                 <input
                                                     type="text"
@@ -284,7 +282,6 @@ function ExperienceAndPublications(props) {
                                                             className="block text-sm font-medium text-gray-700"
                                                         >
                                                             IEEE/ACM/Springer conferences or journals
-                                                            <span style={{ color: "#ff0000" }}> *</span>
                                                         </label>
                                                         <input
                                                             type="text"
@@ -378,8 +375,7 @@ function ExperienceAndPublications(props) {
                                                             htmlFor="stat_of_purpose"
                                                             className="block text-sm font-medium text-gray-700"
                                                         >
-                                                            Statement of Purpose:
-                                                            <span style={{ color: "#ff0000" }}> *</span>
+                                                            Statement of Purpose
                                                         </label>
                                                         <div className="mt-1">
                                                             <textarea
@@ -418,7 +414,7 @@ function ExperienceAndPublications(props) {
                                                             id="publications_pdf"
                                                             name="publications_pdf"
                                                             type="file"
-                                                            
+                                                            required
                                                             accept=".pdf"
                                                             onChange={(e) =>
                                                                 props.handleFileSubmit(e, 5, 60, 1)
@@ -471,7 +467,7 @@ function ExperienceAndPublications(props) {
                                                                 name="publications_pdf"
                                                                 type="text"
                                                                 value={props.details[60].name}
-                                                                
+                                                                required
                                                                 readOnly
                                                             />
 

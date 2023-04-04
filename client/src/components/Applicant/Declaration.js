@@ -48,7 +48,7 @@ function Declaration(props) {
                           type="text"
                           name="full_name"
                           id="full_name"
-                          
+                          required
                           pattern={props.full_name}
                           title="Please match your full name that you have entered in your profile."
                           value={props.details[56]}
@@ -74,7 +74,7 @@ function Declaration(props) {
                               id="signature"
                               name="signature"
                               type="file"
-                              
+                              required
                               accept=".png, .jpeg, .jpg, .gif"
                               onChange={(e) =>
                                 props.handleFileSubmit(e, 1, 57, 3)
@@ -119,7 +119,7 @@ function Declaration(props) {
                                 type="text"
                                 value={props.details[57].name}
                                 // ref={props.ref}
-                                
+                                required
                                 readOnly
                               />
 
@@ -152,7 +152,7 @@ function Declaration(props) {
                           id="place"
                           value={props.details[24]}
                           onChange={(e) => props.onChange(e, 24)}
-                      
+                          required
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
@@ -169,6 +169,7 @@ function Declaration(props) {
                           id="date"
                           name="date"
                           type="date"
+                          required
                           disabled={true}
                           value={props.details[23]}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"

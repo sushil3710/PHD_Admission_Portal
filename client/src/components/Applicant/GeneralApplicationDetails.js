@@ -2,7 +2,6 @@ import React from "react";
 import crossPic from "../../images/red_cross.svg";
 
 function ExperienceAndPublications(props) {
-
     return (
         <div>
             <div className="px-6 py-6 mx-20 my-20 bg-[#f3f4f6] rounded-2xl">
@@ -84,6 +83,7 @@ function ExperienceAndPublications(props) {
                                                     <div className="col-span-6 sm:col-span-3">
                                                         <label className="block text-sm font-medium text-gray-700">
                                                             Whether you want to apply for interdisciplinary program?
+                                                            <span style={{ color: "#ff0000" }}> *</span>
                                                         </label>
                                                         <select
                                                             id="interdisciplinary_prog_check"
@@ -91,7 +91,7 @@ function ExperienceAndPublications(props) {
                                                             value={props.details[42]}
                                                             onChange={(event) => props.onChange(event, 42)}
                                                             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-
+                                                            required
                                                         >
                                                             <option value="">Select</option>
                                                             <option value="YES">YES</option>
@@ -102,6 +102,7 @@ function ExperienceAndPublications(props) {
                                                         <div className="col-span-6 sm:col-span-3">
                                                             <label className="block text-sm font-medium text-gray-700">
                                                                 Name of interdisciplinary department
+                                                                <span style={{ color: "#ff0000" }}> *</span>
                                                             </label>
                                                             <select
                                                                 id="interdisciplinary_prog_check"
@@ -109,6 +110,7 @@ function ExperienceAndPublications(props) {
                                                                 value={props.details[65]}
                                                                 onChange={(event) => props.onChange(event, 65)}
                                                                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                                                required
                                                             >
                                                                 <option value="">Select</option>
                                                                 <option value="Department of Bio-Medical Engineering (DBME)">Department of Bio-Medical Engineering (DBME)</option>
@@ -117,7 +119,8 @@ function ExperienceAndPublications(props) {
                                                     </>) : (<></>)}
                                                     <div className="col-span-6 sm:col-span-3">
                                                         <label className="block text-sm font-medium text-gray-700">
-                                                            Mode of Application:
+                                                            Mode of Application
+                                                            <span style={{ color: "#ff0000" }}> *</span>
                                                         </label>
                                                         <select
                                                             id="mode_of_app"
@@ -125,7 +128,7 @@ function ExperienceAndPublications(props) {
                                                             value={props.details[43]}
                                                             onChange={(event) => props.onChange(event, 43)}
                                                             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-
+                                                            required
                                                         >
                                                             <option value="">Select</option>
                                                             <option value="Regular">Regular</option>
@@ -138,6 +141,7 @@ function ExperienceAndPublications(props) {
                                                             <div className="col-span-6 sm:col-span-3">
                                                                 <label className="block text-sm font-medium text-gray-700">
                                                                     Area of Research (as per advertisement)
+                                                                    <span style={{ color: "#ff0000" }}> *</span>
                                                                 </label>
                                                                 <select
                                                                     id="area_of_research"
@@ -145,7 +149,7 @@ function ExperienceAndPublications(props) {
                                                                     value={props.details[44]}
                                                                     onChange={(event) => props.onChange(event, 44)}
                                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-
+                                                                    required
                                                                 >
                                                                     <option value="">Select</option>
                                                                     <option value="Theory Area of CS">Theory Area of CS</option>
@@ -161,8 +165,6 @@ function ExperienceAndPublications(props) {
                                                                 >
                                                                     Area of research (as per advertisement)
                                                                 </h3>
-
-
                                                                 <label
                                                                     className="block text-sm font-medium text-gray-700"
                                                                 >
@@ -174,6 +176,7 @@ function ExperienceAndPublications(props) {
                                                                     name="1st_pref"
                                                                     value={props.details[45]}
                                                                     id="1st_pref"
+                                                                    required
                                                                     onChange={(event) =>
                                                                         props.onChange(event, 45)
                                                                     }
@@ -263,7 +266,7 @@ function ExperienceAndPublications(props) {
                                                             value={props.details[50]}
                                                             onChange={(event) => props.onChange(event, 50)}
                                                             className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-
+                                                            required
                                                         >
                                                             <option value="">Select</option>
                                                             <option value="YES">YES</option>
@@ -275,6 +278,7 @@ function ExperienceAndPublications(props) {
                                                             <div className="col-span-6 sm:col-span-3">
                                                                 <label className="block text-sm font-medium text-gray-700">
                                                                     Area of Research (as per advertisement)
+                                                                    <span style={{ color: "#ff0000" }}> *</span>
                                                                 </label>
                                                                 <select
                                                                     id="area_of_research"
@@ -282,7 +286,7 @@ function ExperienceAndPublications(props) {
                                                                     value={props.details[44]}
                                                                     onChange={(event) => props.onChange(event, 44)}
                                                                     className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-
+                                                                    required
                                                                 >
                                                                     <option value="">Select</option>
                                                                     <option value="Theory Area of CS">Theory Area of CS</option>
@@ -298,8 +302,6 @@ function ExperienceAndPublications(props) {
                                                                 >
                                                                     Area of research (as per advertisement)
                                                                 </h3>
-
-
                                                                 <label
                                                                     className="block text-sm font-medium text-gray-700"
                                                                 >
@@ -311,6 +313,7 @@ function ExperienceAndPublications(props) {
                                                                     name="1st_pref"
                                                                     value={props.details[45]}
                                                                     id="1st_pref"
+                                                                    required
                                                                     onChange={(event) =>
                                                                         props.onChange(event, 45)
                                                                     }
@@ -368,7 +371,6 @@ function ExperienceAndPublications(props) {
                                                                     className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                                 />
                                                             </div>
-
                                                             <div className="col-span-full sm:col-span-full">
                                                                 <label
                                                                     htmlFor="specific_research_area"
@@ -396,8 +398,6 @@ function ExperienceAndPublications(props) {
                                                         >
                                                             Area of research (as per advertisement)
                                                         </h3>
-
-
                                                         <label
                                                             className="block text-sm font-medium text-gray-700"
                                                         >
@@ -409,6 +409,7 @@ function ExperienceAndPublications(props) {
                                                             name="1st_pref"
                                                             value={props.details[45]}
                                                             id="1st_pref"
+                                                            required
                                                             onChange={(event) =>
                                                                 props.onChange(event, 45)
                                                             }
@@ -503,6 +504,7 @@ function ExperienceAndPublications(props) {
                                                                     props.onChange(event, 51)
                                                                 }
                                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                                                                required
                                                             />
                                                         </div>
                                                         <div className="col-span-6 sm:col-span-3">
@@ -511,8 +513,6 @@ function ExperienceAndPublications(props) {
                                                             >
                                                                 Area of research (as per advertisement)
                                                             </h3>
-
-
                                                             <label
                                                                 className="block text-sm font-medium text-gray-700"
                                                             >
@@ -522,6 +522,7 @@ function ExperienceAndPublications(props) {
                                                             <input
                                                                 type="text"
                                                                 name="1st_pref"
+                                                                required
                                                                 value={props.details[45]}
                                                                 id="1st_pref"
                                                                 onChange={(event) =>
@@ -581,7 +582,6 @@ function ExperienceAndPublications(props) {
                                                                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                                                             />
                                                         </div>
-
                                                         <div className="col-span-full sm:col-span-full">
                                                             <label
                                                                 htmlFor="specific_research_area"
@@ -617,7 +617,6 @@ function ExperienceAndPublications(props) {
                                                         Upload your NOC (if applying for admission other than regular PhD)
                                                         <span style={{ color: "#ff0000" }}> *</span>
                                                     </label>
-
                                                     {!props.details[61].name && (
                                                         <>
                                                             <input
@@ -625,6 +624,7 @@ function ExperienceAndPublications(props) {
                                                                 aria-describedby="profile-picture-desc"
                                                                 id="noc_pdf"
                                                                 name="noc_pdf"
+                                                                required
                                                                 type="file"
                                                                 accept=".pdf"
                                                                 onChange={(e) =>
@@ -677,11 +677,10 @@ function ExperienceAndPublications(props) {
                                                                     id="noc_pdf"
                                                                     name="noc_pdf"
                                                                     type="text"
+                                                                    required
                                                                     value={props.details[61].name}
-                                                                    
                                                                     readOnly
                                                                 />
-
                                                                 <button
                                                                     type="button"
                                                                     className="flex items-center ml-2 mr-2 justify-center"
@@ -722,7 +721,7 @@ function ExperienceAndPublications(props) {
                                                                     id="resume_pdf"
                                                                     name="resume_pdf"
                                                                     type="file"
-                                                                    
+                                                                    required
                                                                     accept=".pdf"
                                                                     onChange={(e) =>
                                                                         props.handleFileSubmit(e, 5, 62, 1)
@@ -775,7 +774,7 @@ function ExperienceAndPublications(props) {
                                                                         name="resume_pdf"
                                                                         type="text"
                                                                         value={props.details[62].name}
-                                                                        
+                                                                        required
                                                                         readOnly
                                                                     />
 
@@ -818,13 +817,12 @@ function ExperienceAndPublications(props) {
                                                                         id="noc_pdf"
                                                                         name="noc_pdf"
                                                                         type="file"
-                                                                        
+                                                                        required
                                                                         accept=".pdf"
                                                                         onChange={(e) =>
                                                                             props.handleFileSubmit(e, 5, 61, 1)
                                                                         }
                                                                     />
-
                                                                     <div
                                                                         className="mt-1 text-sm text-gray-500 dark:text-gray-300"
                                                                         id="gate_result_help"
@@ -845,7 +843,6 @@ function ExperienceAndPublications(props) {
                                                                         </span>{" "}
                                                                         .pdf
                                                                     </div>
-
                                                                     <div
                                                                         className="mt-1 text-sm text-gray-500 dark:text-gray-300"
                                                                         id="gate_result_help"
@@ -871,7 +868,7 @@ function ExperienceAndPublications(props) {
                                                                             name="noc_pdf"
                                                                             type="text"
                                                                             value={props.details[61].name}
-                                                                            
+                                                                            required
                                                                             readOnly
                                                                         />
 
@@ -911,7 +908,7 @@ function ExperienceAndPublications(props) {
                                                                         id="resume_pdf"
                                                                         name="resume_pdf"
                                                                         type="file"
-                                                                        
+                                                                        required
                                                                         accept=".pdf"
                                                                         onChange={(e) =>
                                                                             props.handleFileSubmit(e, 5, 62, 1)
@@ -964,8 +961,8 @@ function ExperienceAndPublications(props) {
                                                                             name="resume_pdf"
                                                                             type="text"
                                                                             value={props.details[62].name}
-                                                                            
                                                                             readOnly
+                                                                            required
                                                                         />
 
                                                                         <button
@@ -1007,7 +1004,7 @@ function ExperienceAndPublications(props) {
                                                                             id="letter_PI_pdf"
                                                                             name="letter_PI_pdf"
                                                                             type="file"
-                                                                            
+                                                                            required
                                                                             accept=".pdf"
                                                                             onChange={(e) =>
                                                                                 props.handleFileSubmit(e, 5, 63, 1)
@@ -1060,8 +1057,8 @@ function ExperienceAndPublications(props) {
                                                                                 name="letter_PI_pdf"
                                                                                 type="text"
                                                                                 value={props.details[63].name}
-                                                                                
                                                                                 readOnly
+                                                                                required
                                                                             />
 
                                                                             <button
@@ -1102,7 +1099,7 @@ function ExperienceAndPublications(props) {
                                                             id="sop_pdf"
                                                             name="sop_pdf"
                                                             type="file"
-                                                            
+                                                            required
                                                             accept=".pdf"
                                                             onChange={(e) =>
                                                                 props.handleFileSubmit(e, 5, 64, 1)
@@ -1163,8 +1160,8 @@ function ExperienceAndPublications(props) {
                                                                 name="sop_pdf"
                                                                 type="text"
                                                                 value={props.details[64].name}
-                                                                
                                                                 readOnly
+                                                                required
                                                             />
 
                                                             <button

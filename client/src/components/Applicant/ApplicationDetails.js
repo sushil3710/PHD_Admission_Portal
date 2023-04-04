@@ -23,8 +23,6 @@ function ApplicantionDetails() {
   const [offering, setOffering] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
-  const [hasFilledHighestGate, setHasFilledHighestGate] = useState("");
-  const [hasGivenMultipleGates, setHasGivenMultipleGates] = useState("");
   const [isFetching, setIsFetching] = useState(true);
   function changeDateFormat() {
     let date = new Date();
@@ -262,13 +260,9 @@ function ApplicantionDetails() {
                 ),
                 2: (
                 <QualifyingExamDetails
-                  hasFilledHighestGate={hasFilledHighestGate}
-                  setHasFilledHighestGate={setHasFilledHighestGate}
-                    hasGivenMultipleGates={hasGivenMultipleGates}
-                    decreasePageNumber={decreasePageNumber}
-                  setHasGivenMultipleGates={setHasGivenMultipleGates}
-                  offering={offering}
                   increasePageNumber={increasePageNumber}
+                  decreasePageNumber={decreasePageNumber}
+                  offering={offering}
                   details={applicant_details}
                   onChange={handleApplicantDetailsChange}
                   handleFileSubmit={handleFileSubmit}
@@ -300,10 +294,10 @@ function ApplicantionDetails() {
               ),
               5: (
                 <Declaration
-                  full_name={full_name}
                   increasePageNumber={increasePageNumber}
-                  details={applicant_details}
                   decreasePageNumber={decreasePageNumber}
+                  full_name={full_name}
+                  details={applicant_details}
                   onChange={handleApplicantDetailsChange}
                   handleFileSubmit={handleFileSubmit}
                   emptyFileIndex={emptyFileIndex}

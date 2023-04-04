@@ -53,7 +53,6 @@ function QualifyingExamDetails(props) {
                           className="block text-sm font-medium text-gray-700"
                         >
                           Qualifying Examination
-                          <span style={{ color: "#ff0000" }}> *</span>
                         </label>
                         {props.offering.department == "Computer Science and Engineering" ?
                           (<> <input
@@ -83,7 +82,6 @@ function QualifyingExamDetails(props) {
                               className="block text-sm font-medium text-gray-700"
                             >
                               Branch Code
-                              <span style={{ color: "#ff0000" }}> *</span>
                             </label>
                             <select
                               id="branch_code_1"
@@ -140,7 +138,7 @@ function QualifyingExamDetails(props) {
                           htmlFor="year_1"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          Year<span style={{ color: "#ff0000" }}> *</span>
+                          Year
                         </label>
                         <input
                           type="number"
@@ -158,7 +156,6 @@ function QualifyingExamDetails(props) {
                           className="block text-sm font-medium text-gray-700"
                         >
                           Valid Upto
-                          <span style={{ color: "#ff0000" }}> *</span>
                         </label>
                         <input
                           type="number"
@@ -177,13 +174,11 @@ function QualifyingExamDetails(props) {
                           className="block text-sm font-medium text-gray-700"
                         >
                           All India Rank (AIR)
-                          <span style={{ color: "#ff0000" }}> *</span>
                         </label>
                         <input
                           type="number"
                           name="all_india_rank_1"
                           id="all_india_rank_1"
-                          
                           min={1}
                           value={props.details[9]}
                           onChange={(event) => props.onChange(event, 9)}
@@ -197,7 +192,6 @@ function QualifyingExamDetails(props) {
                           className="block text-sm font-medium text-gray-700"
                         >
                           GATE Score
-                          <span style={{ color: "#ff0000" }}> * </span>
                           <HtmlTooltip
                             title={
                               <React.Fragment>
@@ -216,7 +210,6 @@ function QualifyingExamDetails(props) {
                           type="number"
                           name="score_1"
                           id="score_1"
-                          
                           min={0}
                           value={props.details[10]}
                           onChange={(event) => props.onChange(event, 10)}
@@ -235,7 +228,6 @@ function QualifyingExamDetails(props) {
                           className="block text-sm font-medium text-gray-700"
                         >
                           Qualifying Examination
-                          <span style={{ color: "#ff0000" }}> *</span>
                         </label>
                         {props.offering.department == "Computer Science and Engineering" ?
                           (<> <input
@@ -265,12 +257,10 @@ function QualifyingExamDetails(props) {
                               className="block text-sm font-medium text-gray-700"
                             >
                               Branch Code
-                              <span style={{ color: "#ff0000" }}> *</span>
                             </label>
                             <select
                               id="branch_code_2"
                               name="branch_code_2"
-                              
                               value={props.details[12]}
                               onChange={(e) => props.onChange(e, 12)}
                               className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -323,7 +313,7 @@ function QualifyingExamDetails(props) {
                           htmlFor="year_2"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          Year<span style={{ color: "#ff0000" }}> *</span>
+                          Year
                         </label>
                         <input
                           type="number"
@@ -341,13 +331,11 @@ function QualifyingExamDetails(props) {
                           className="block text-sm font-medium text-gray-700"
                         >
                           Valid Upto
-                          <span style={{ color: "#ff0000" }}> *</span>
                         </label>
                         <input
                           type="number"
                           name="valid_upto_2"
                           id="valid_upto_2"
-                          
                           value={props.details[14]}
                           onChange={(event) => props.onChange(event, 14)}
                           className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
@@ -360,13 +348,11 @@ function QualifyingExamDetails(props) {
                           className="block text-sm font-medium text-gray-700"
                         >
                           All India Rank (AIR)
-                          <span style={{ color: "#ff0000" }}> *</span>
                         </label>
                         <input
                           type="number"
                           name="all_india_rank_2"
                           id="all_india_rank_2"
-                          
                           min={1}
                           value={props.details[15]}
                           onChange={(event) => props.onChange(event, 15)}
@@ -380,7 +366,6 @@ function QualifyingExamDetails(props) {
                           className="block text-sm font-medium text-gray-700"
                         >
                           GATE Score
-                          <span style={{ color: "#ff0000" }}> * </span>
                           <HtmlTooltip
                             title={
                               <React.Fragment>
@@ -399,7 +384,6 @@ function QualifyingExamDetails(props) {
                           type="number"
                           name="score_2"
                           id="score_2"
-                          
                           min={0}
                           value={props.details[16]}
                           onChange={(event) => props.onChange(event, 16)}
@@ -453,7 +437,6 @@ function QualifyingExamDetails(props) {
                         />
 
                       </div>
-
                       <div className="col-span-6 sm:col-span-3">
                         <label
                           htmlFor="year_3"
@@ -550,7 +533,6 @@ function QualifyingExamDetails(props) {
                           Self attested copies of GATE/CSIR/UGC/NET etc. as mentioned in the form
                           <span style={{ color: "#ff0000" }}> *</span>
                         </label>
-
                         {!props.details[58].name && (
                           <>
                             <input
@@ -559,7 +541,7 @@ function QualifyingExamDetails(props) {
                               id="exam_result_pdf"
                               name="exam_result_pdf"
                               type="file"
-                              
+                              required
                               accept=".pdf"
                               onChange={(e) =>
                                 props.handleFileSubmit(e, 5, 58, 1)
@@ -612,7 +594,7 @@ function QualifyingExamDetails(props) {
                                 name="exam_result_pdf"
                                 type="text"
                                 value={props.details[58].name}
-                                
+                                required
                                 readOnly
                               />
 
