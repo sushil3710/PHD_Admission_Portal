@@ -179,7 +179,7 @@ export default function Review(props) {
                   NOC File
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {props.details[61]}
+                  {props.details[61].name}
                 </dd>
               </div>
 
@@ -254,7 +254,7 @@ export default function Review(props) {
                       Resume PDF
                     </dt>
                     <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      {props.details[62]}
+                      {props.details[62].name}
                     </dd>
                   </div>
                 </>)}
@@ -309,7 +309,7 @@ export default function Review(props) {
                   NOC File
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {props.details[61]}
+                  {props.details[61].name}
                 </dd>
               </div>
               <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -317,7 +317,7 @@ export default function Review(props) {
                   Resume PDF
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {props.details[62]}
+                  {props.details[62].name}
                 </dd>
               </div>
             </>) : (<>
@@ -379,7 +379,7 @@ export default function Review(props) {
                   Letter of recommendation from PI
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                  {props.details[63]}
+                  {props.details[63].name}
                 </dd>
               </div>
             </>)}
@@ -388,7 +388,7 @@ export default function Review(props) {
                 Statement of Purpose
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                {props.details[64]}
+                {props.details[64].name}
               </dd>
             </div>
           </dl>
@@ -560,6 +560,14 @@ export default function Review(props) {
                 {props.details[20]}
               </dd>
             </div>
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">
+                Self attested copies of GATE/CSIR/UGC/NET etc. as mentioned in the form
+              </dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                {props.details[58].name}
+              </dd>
+            </div>
           </dl>
         </div>
         <div className="border-t border-gray-200">
@@ -705,7 +713,6 @@ export default function Review(props) {
               </>) :
               (<>
               </>)}
-
           </dl>
         </div>
       </div>
@@ -767,7 +774,7 @@ export default function Review(props) {
                 {profileInfo.is_pwd}
               </dd>
             </div>
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
                 PWD Type i.e HH, OH, VI etc:
               </dt>
@@ -776,7 +783,7 @@ export default function Review(props) {
               </dd>
             </div>
 
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
                 Marital Status
               </dt>
@@ -787,7 +794,7 @@ export default function Review(props) {
               </dd>
             </div>
 
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Nationality</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {profileInfo.nationality === "null"
@@ -796,14 +803,14 @@ export default function Review(props) {
               </dd>
             </div>
 
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Gender</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
                 {profileInfo.gender}
               </dd>
             </div>
 
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">Uploads</dt>
               {profileInfo.category_certificate_url && (
                 <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
