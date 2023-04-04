@@ -328,7 +328,7 @@ export default function OfferingList() {
                   ""
                 )}
 
-                <div className="flex">
+                {/* <div className="flex">
                   <PublishAllResultsModal
                     cycleName={cycleName}
                     cycle_id={params.cycle_id}
@@ -337,7 +337,7 @@ export default function OfferingList() {
                     cycleName={cycleName}
                     cycle_id={params.cycle_id}
                   />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

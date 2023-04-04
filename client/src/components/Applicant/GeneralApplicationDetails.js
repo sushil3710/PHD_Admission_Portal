@@ -13,7 +13,7 @@ function ExperienceAndPublications(props) {
                                 <h3 className="ml-5 mb-2 text-left text-2xl font-medium leading-6 text-gray-900">
                                     General Details
                                 </h3>
-                                {props.offering.department == "Computer Science and Engineering" && (props.offering.offering_type == "Regular/External/Part Time" || props.offering.offering_type == "Direct") ?
+                                {props.offering.department === "Computer Science and Engineering" && (props.offering.offering_type === "Regular/External/Part Time" || props.offering.offering_type == "Direct") ?
                                     (<>
                                         <p className="ml-5 mb-2 text-left text-sm font-medium leading-6 text-gray-900">** Theory areas of research include algorithms design,approximate algorithms, theory of computation,logic of computer science,complexity theory etc. </p>
                                         <p className="ml-5 mb-2 text-left text-sm font-medium leading-6 text-gray-900">** Systems areas of research includes operating systems,computer systems/architecture,computer network,software architecture,databases etc.</p>
@@ -79,7 +79,7 @@ function ExperienceAndPublications(props) {
                                                 </div>
                                             </>)}
                                             
-                                            {props.offering.offering_type == "Regular/External/Part Time" ?
+                                            {props.offering.offering_type === "Regular/External/Part Time" ?
                                                 (<>
                                                     <div className="col-span-6 sm:col-span-3">
                                                         <label className="block text-sm font-medium text-gray-700">
@@ -98,7 +98,7 @@ function ExperienceAndPublications(props) {
                                                             <option value="NO">NO</option>
                                                         </select>
                                                     </div>
-                                                    {props.details[42] == "YES" ? (<>
+                                                    {props.details[42] === "YES" ? (<>
                                                         <div className="col-span-6 sm:col-span-3">
                                                             <label className="block text-sm font-medium text-gray-700">
                                                                 Name of interdisciplinary department
@@ -133,7 +133,7 @@ function ExperienceAndPublications(props) {
                                                             <option value="Part-Time">Part-Time</option>
                                                         </select>
                                                     </div>
-                                                    {props.offering.department == "Computer Science and Engineering" ?
+                                                    {props.offering.department === "Computer Science and Engineering" ?
                                                         (<>
                                                             <div className="col-span-6 sm:col-span-3">
                                                                 <label className="block text-sm font-medium text-gray-700">
@@ -270,7 +270,7 @@ function ExperienceAndPublications(props) {
                                                             <option value="NO">NO</option>
                                                         </select>
                                                     </div>
-                                                    {props.offering.department == "Computer Science and Engineering" ?
+                                                    {props.offering.department === "Computer Science and Engineering" ?
                                                         (<>
                                                             <div className="col-span-6 sm:col-span-3">
                                                                 <label className="block text-sm font-medium text-gray-700">
@@ -605,7 +605,7 @@ function ExperienceAndPublications(props) {
                                         </div>
                                     </div>
 
-                                    {props.offering.offering_type == "Regular/External/Part Time" ? (<>
+                                    {props.offering.offering_type === "Regular/External/Part Time" ? (<>
 
                                         <div className="px-4 bg-white sm:p-6">
                                             <div className="grid grid-cols-6 gap-6">
@@ -701,7 +701,7 @@ function ExperienceAndPublications(props) {
                                         </div>
 
                                     </>)
-                                        : props.offering.offering_type == "Direct" ? (<>
+                                        : props.offering.offering_type === "Direct" ? (<>
 
                                             <div className="px-4 bg-white sm:p-6">
                                                 <div className="grid grid-cols-6 gap-6">

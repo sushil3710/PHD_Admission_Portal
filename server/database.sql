@@ -5,6 +5,13 @@ CREATE TABLE signup_verification (
     expiration_time TIMESTAMP
 );
 
+
+CREATE TABLE forgot_password_verification (
+    email_id TEXT PRIMARY KEY,
+    hashed_otp TEXT,
+    expiration_time TIMESTAMP
+);
+
 CREATE TABLE login_verification (
     email_id TEXT PRIMARY KEY,
     hashed_otp TEXT,
@@ -14,6 +21,7 @@ CREATE TABLE login_verification (
 CREATE TABLE applicants (
     -- Primary Keys
     email_id TEXT PRIMARY KEY,
+    passwd TEXT,
     applicant_id SERIAL,
 
     -- Personal Details
@@ -76,6 +84,7 @@ CREATE TABLE applicants (
 CREATE TABLE admins(
   name TEXT, 
   email_id TEXT PRIMARY KEY,
+  passwd TEXT,
   admin_type INT NOT NULL,
   department TEXT[]
 );
@@ -166,14 +175,104 @@ CREATE TABLE templates (
 );
 
 -- PERMANENT INSERT
-INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES('default@template', 'Default Applicant List', 'APPLICANT LIST', ARRAY['application_id', 'full_name','guardian', 'fathers_name', 'profile_image_url', 'date_of_birth', 'aadhar_card_number',
-'category', 'is_pwd','pwd_type','blood_group', 'marital_status','spouse_name','spouse_occupation', 'nationality', 'category_certificate_url','pwd_url','gender','advertisement', 'communication_address', 'communication_city',
-'communication_state', 'communication_pincode', 'permanent_address', 'permanent_city', 'permanent_state',
+INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES('default@template', 'REGULAR ', 'APPLICANT LIST', ARRAY[ 'application_id', 'applying_for', 'mode_of_app','full_name','guardian', 'fathers_name', 'profile_image_url', 'date_of_birth', 'aadhar_card_number',
+'category', 'is_pwd','pwd_type','blood_group', 'marital_status','spouse_name','spouse_occupation', 'nationality', 'category_certificate_url','pwd_url','gender','advertisement', 'communication_address', 'communication_city','communication_state', 'communication_pincode', 'permanent_address', 'permanent_city', 'permanent_state',
 'permanent_pincode', 'mobile_number', 'alternate_mobile_number', 'email_id', 'degree_10th', 'board_10th', 'percentage_cgpa_format_10th','percentage_cgpa_value_10th',
 'year_of_passing_10th', 'remarks_10th', 'marksheet_10th_url', 'degree_12th', 'board_12th', 'percentage_cgpa_format_12th', 'percentage_cgpa_value_12th',
-'year_of_passing_12th', 'remarks_12th', 'marksheet_12th_url', 'degrees', 'other_remarks', 'is_last_degree_completed', 'amount', 'transaction_id', 'bank', 
-'date_of_transaction', 'qualifying_examination', 'branch_code', 'year', 'gate_enrollment_number', 'coap_registeration_number', 'all_india_rank', 'gate_score', 'valid_upto','self_attested_copies_url', 'remarks','signature_url',
-'date_of_declaration', 'place_of_declaration','is_sponsored_applicant','name_of_sponsoring_org','name_of_working_org','address_of_org','designation','post_type','duration_post_start','duration_post_end','years_of_service'], 
+'year_of_passing_12th', 'remarks_12th', 'marksheet_12th_url', 'degrees', 'other_remarks', 'is_last_degree_completed','transaction_id',
+'interdisciplinary_prog_check' ,'interdisciplinary_prog_name','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','noc_pdf','sop_pdf',
+'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
+,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'total_years_of_service ','publications_pdf'], 
+ARRAY['Application ID','Full Name','Father''s Name','Email Address','Profile Image','Date of Birth','Aadhar Card Number','Category','Category Certificate','Belongs to PWD','Marital Status','Nationality','Gender','Communication Address','Permanent Address','Mobile Number','Alternate Mobile Number','Educational Details: 10th',
+'Educational Details: 12th','Educational Details: College','Educational Remarks','Last Degree Completion Status','Qualifying Exmaination','Branch Code','GATE Examination Year','GATE Enrollment Number',
+'COAP Registration Number','All India Rank','GATE Score','Valid Upto','Self Attested Copies of GATE','Qualifying Exam Remarks','Amount','Transaction ID','Bank','Transaction Slip','Date of Transaction','Signature','Date of Declaration','Place of Declaration','Status','Status Remarks','is_sponsored_applicant','name_of_sponsoring_org','name_of_working_org','address_of_org','designation','post_type','duration_post_start','duration_post_end','years_of_service']);
+
+INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES('default@template', 'EXTERNAL ', 'APPLICANT LIST', ARRAY[ 'application_id', 'applying_for', 'mode_of_app','full_name','guardian', 'fathers_name', 'profile_image_url', 'date_of_birth', 'aadhar_card_number',
+'category', 'is_pwd','pwd_type','blood_group', 'marital_status','spouse_name','spouse_occupation', 'nationality', 'category_certificate_url','pwd_url','gender','advertisement', 'communication_address', 'communication_city','communication_state', 'communication_pincode', 'permanent_address', 'permanent_city', 'permanent_state',
+'permanent_pincode', 'mobile_number', 'alternate_mobile_number', 'email_id', 'degree_10th', 'board_10th', 'percentage_cgpa_format_10th','percentage_cgpa_value_10th',
+'year_of_passing_10th', 'remarks_10th', 'marksheet_10th_url', 'degree_12th', 'board_12th', 'percentage_cgpa_format_12th', 'percentage_cgpa_value_12th',
+'year_of_passing_12th', 'remarks_12th', 'marksheet_12th_url', 'degrees', 'other_remarks', 'is_last_degree_completed','transaction_id',
+'interdisciplinary_prog_check' ,'interdisciplinary_prog_name','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','noc_pdf','sop_pdf',
+'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
+,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'total_years_of_service ','publications_pdf'], 
+ARRAY['Application ID','Full Name','Father''s Name','Email Address','Profile Image','Date of Birth','Aadhar Card Number','Category','Category Certificate','Belongs to PWD','Marital Status','Nationality','Gender','Communication Address','Permanent Address','Mobile Number','Alternate Mobile Number','Educational Details: 10th',
+'Educational Details: 12th','Educational Details: College','Educational Remarks','Last Degree Completion Status','Qualifying Exmaination','Branch Code','GATE Examination Year','GATE Enrollment Number',
+'COAP Registration Number','All India Rank','GATE Score','Valid Upto','Self Attested Copies of GATE','Qualifying Exam Remarks','Amount','Transaction ID','Bank','Transaction Slip','Date of Transaction','Signature','Date of Declaration','Place of Declaration','Status','Status Remarks','is_sponsored_applicant','name_of_sponsoring_org','name_of_working_org','address_of_org','designation','post_type','duration_post_start','duration_post_end','years_of_service']);
+
+INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES('default@template', 'PART-TIME ', 'APPLICANT LIST', ARRAY[ 'application_id', 'applying_for', 'mode_of_app','full_name','guardian', 'fathers_name', 'profile_image_url', 'date_of_birth', 'aadhar_card_number',
+'category', 'is_pwd','pwd_type','blood_group', 'marital_status','spouse_name','spouse_occupation', 'nationality', 'category_certificate_url','pwd_url','gender','advertisement', 'communication_address', 'communication_city','communication_state', 'communication_pincode', 'permanent_address', 'permanent_city', 'permanent_state',
+'permanent_pincode', 'mobile_number', 'alternate_mobile_number', 'email_id', 'degree_10th', 'board_10th', 'percentage_cgpa_format_10th','percentage_cgpa_value_10th',
+'year_of_passing_10th', 'remarks_10th', 'marksheet_10th_url', 'degree_12th', 'board_12th', 'percentage_cgpa_format_12th', 'percentage_cgpa_value_12th',
+'year_of_passing_12th', 'remarks_12th', 'marksheet_12th_url', 'degrees', 'other_remarks', 'is_last_degree_completed','transaction_id',
+'interdisciplinary_prog_check' ,'interdisciplinary_prog_name','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','noc_pdf','sop_pdf',
+'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
+,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'total_years_of_service ','publications_pdf'], 
+ARRAY['Application ID','Full Name','Father''s Name','Email Address','Profile Image','Date of Birth','Aadhar Card Number','Category','Category Certificate','Belongs to PWD','Marital Status','Nationality','Gender','Communication Address','Permanent Address','Mobile Number','Alternate Mobile Number','Educational Details: 10th',
+'Educational Details: 12th','Educational Details: College','Educational Remarks','Last Degree Completion Status','Qualifying Exmaination','Branch Code','GATE Examination Year','GATE Enrollment Number',
+'COAP Registration Number','All India Rank','GATE Score','Valid Upto','Self Attested Copies of GATE','Qualifying Exam Remarks','Amount','Transaction ID','Bank','Transaction Slip','Date of Transaction','Signature','Date of Declaration','Place of Declaration','Status','Status Remarks','is_sponsored_applicant','name_of_sponsoring_org','name_of_working_org','address_of_org','designation','post_type','duration_post_start','duration_post_end','years_of_service']);
+
+
+INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES('default@template', 'DIRECT ', 'APPLICANT LIST', ARRAY[ 'application_id', 'applying_for','full_name','guardian', 'fathers_name', 'profile_image_url', 'date_of_birth', 'aadhar_card_number',
+'category', 'is_pwd','pwd_type','blood_group', 'marital_status','spouse_name','spouse_occupation', 'nationality', 'category_certificate_url','pwd_url','gender','advertisement', 'communication_address', 'communication_city','communication_state', 'communication_pincode', 'permanent_address', 'permanent_city', 'permanent_state',
+'permanent_pincode', 'mobile_number', 'alternate_mobile_number', 'email_id', 'degree_10th', 'board_10th', 'percentage_cgpa_format_10th','percentage_cgpa_value_10th',
+'year_of_passing_10th', 'remarks_10th', 'marksheet_10th_url', 'degree_12th', 'board_12th', 'percentage_cgpa_format_12th', 'percentage_cgpa_value_12th',
+'year_of_passing_12th', 'remarks_12th', 'marksheet_12th_url', 'degrees', 'other_remarks', 'is_last_degree_completed','transaction_id','bachelor_degree_complete','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','resume_pdf','sop_pdf',
+'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
+,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'total_years_of_service ','publications_pdf'], 
+ARRAY['Application ID','Full Name','Father''s Name','Email Address','Profile Image','Date of Birth','Aadhar Card Number','Category','Category Certificate','Belongs to PWD','Marital Status','Nationality','Gender','Communication Address','Permanent Address','Mobile Number','Alternate Mobile Number','Educational Details: 10th',
+'Educational Details: 12th','Educational Details: College','Educational Remarks','Last Degree Completion Status','Qualifying Exmaination','Branch Code','GATE Examination Year','GATE Enrollment Number',
+'COAP Registration Number','All India Rank','GATE Score','Valid Upto','Self Attested Copies of GATE','Qualifying Exam Remarks','Amount','Transaction ID','Bank','Transaction Slip','Date of Transaction','Signature','Date of Declaration','Place of Declaration','Status','Status Remarks','is_sponsored_applicant','name_of_sponsoring_org','name_of_working_org','address_of_org','designation','post_type','duration_post_start','duration_post_end','years_of_service']);
+
+
+INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES('default@template', 'STAFF MEMBER ', 'APPLICANT LIST', ARRAY[ 'application_id', 'applying_for','full_name','guardian', 'fathers_name', 'profile_image_url', 'date_of_birth', 'aadhar_card_number',
+'category', 'is_pwd','pwd_type','blood_group', 'marital_status','spouse_name','spouse_occupation', 'nationality', 'category_certificate_url','pwd_url','gender','advertisement', 'communication_address', 'communication_city','communication_state', 'communication_pincode', 'permanent_address', 'permanent_city', 'permanent_state',
+'permanent_pincode', 'mobile_number', 'alternate_mobile_number', 'email_id', 'degree_10th', 'board_10th', 'percentage_cgpa_format_10th','percentage_cgpa_value_10th',
+'year_of_passing_10th', 'remarks_10th', 'marksheet_10th_url', 'degree_12th', 'board_12th', 'percentage_cgpa_format_12th', 'percentage_cgpa_value_12th',
+'year_of_passing_12th', 'remarks_12th', 'marksheet_12th_url', 'degrees', 'other_remarks', 'is_last_degree_completed','transaction_id','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','noc_pdf','resume_pdf','sop_pdf',
+'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
+,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'total_years_of_service ','publications_pdf'], 
+ARRAY['Application ID','Full Name','Father''s Name','Email Address','Profile Image','Date of Birth','Aadhar Card Number','Category','Category Certificate','Belongs to PWD','Marital Status','Nationality','Gender','Communication Address','Permanent Address','Mobile Number','Alternate Mobile Number','Educational Details: 10th',
+'Educational Details: 12th','Educational Details: College','Educational Remarks','Last Degree Completion Status','Qualifying Exmaination','Branch Code','GATE Examination Year','GATE Enrollment Number',
+'COAP Registration Number','All India Rank','GATE Score','Valid Upto','Self Attested Copies of GATE','Qualifying Exam Remarks','Amount','Transaction ID','Bank','Transaction Slip','Date of Transaction','Signature','Date of Declaration','Place of Declaration','Status','Status Remarks','is_sponsored_applicant','name_of_sponsoring_org','name_of_working_org','address_of_org','designation','post_type','duration_post_start','duration_post_end','years_of_service']);
+
+
+INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES('default@template', 'PROJECT STAFF ', 'APPLICANT LIST', ARRAY[ 'application_id', 'applying_for','full_name','guardian', 'fathers_name', 'profile_image_url', 'date_of_birth', 'aadhar_card_number',
+'category', 'is_pwd','pwd_type','blood_group', 'marital_status','spouse_name','spouse_occupation', 'nationality', 'category_certificate_url','pwd_url','gender','advertisement', 'communication_address', 'communication_city','communication_state', 'communication_pincode', 'permanent_address', 'permanent_city', 'permanent_state',
+'permanent_pincode', 'mobile_number', 'alternate_mobile_number', 'email_id', 'degree_10th', 'board_10th', 'percentage_cgpa_format_10th','percentage_cgpa_value_10th',
+'year_of_passing_10th', 'remarks_10th', 'marksheet_10th_url', 'degree_12th', 'board_12th', 'percentage_cgpa_format_12th', 'percentage_cgpa_value_12th',
+'year_of_passing_12th', 'remarks_12th', 'marksheet_12th_url', 'degrees', 'other_remarks', 'is_last_degree_completed','transaction_id',' pi_project_number','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','letter_pi__pdf','sop_pdf',
+'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
+,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
+'total_years_of_service ','publications_pdf'], 
 ARRAY['Application ID','Full Name','Father''s Name','Email Address','Profile Image','Date of Birth','Aadhar Card Number','Category','Category Certificate','Belongs to PWD','Marital Status','Nationality','Gender','Communication Address','Permanent Address','Mobile Number','Alternate Mobile Number','Educational Details: 10th',
 'Educational Details: 12th','Educational Details: College','Educational Remarks','Last Degree Completion Status','Qualifying Exmaination','Branch Code','GATE Examination Year','GATE Enrollment Number',
 'COAP Registration Number','All India Rank','GATE Score','Valid Upto','Self Attested Copies of GATE','Qualifying Exam Remarks','Amount','Transaction ID','Bank','Transaction Slip','Date of Transaction','Signature','Date of Declaration','Place of Declaration','Status','Status Remarks','is_sponsored_applicant','name_of_sponsoring_org','name_of_working_org','address_of_org','designation','post_type','duration_post_start','duration_post_end','years_of_service']);
@@ -182,8 +281,8 @@ ARRAY['Application ID','Full Name','Father''s Name','Email Address','Profile Ima
 INSERT INTO current_cycle(cycle_id) VALUES(0);
 
 -- Do always
-INSERT INTO admins(name, email_id, admin_type, department) VALUES('Rohit', '2020csb1118@iitrpr.ac.in', 0, '{Academics}');
-INSERT INTO admins(name, email_id, admin_type, department) VALUES('Sushil', '2020csb1132@iitrpr.ac.in', 0, '{Academics}');
-INSERT INTO admins(name, email_id, admin_type, department) VALUES('Shruti', '2020csb1128@iitrpr.ac.in', 0, '{Academics}');
-INSERT INTO admins(name, email_id, admin_type, department) VALUES('tanish', '2020csb1133@iitrpr.ac.in', 0, '{Academics}');
+INSERT INTO admins(name, email_id,passwd, admin_type, department) VALUES('Rohit',  '2020csb1118@iitrpr.ac.in','root', 0, '{Academics}');
+INSERT INTO admins(name, email_id,passwd ,admin_type, department) VALUES('Sushil', '2020csb1132@iitrpr.ac.in','root', 0, '{Academics}');
+INSERT INTO admins(name, email_id,passwd ,admin_type, department) VALUES('Shruti', '2020csb1128@iitrpr.ac.in','root', 0, '{Academics}');
+INSERT INTO admins(name, email_id,passwd, admin_type, department) VALUES('tanish', '2020csb1133@iitrpr.ac.in','root', 0, '{Academics}');
 

@@ -35,6 +35,10 @@ app.post("/auth/signin/otp", auth.signin_otp);
 
 app.post("/auth/signin/verify", auth.signin_verify);
 
+app.post("/auth/forgotpassword/otp", auth.forgot_password_otp);
+
+app.post("/auth/forgotpassword/verify", auth.forgot_password_verify);
+
 app.post("/auth/signup/otp", auth.signup_otp);
 
 app.post("/auth/signup/verify", auth.signup_verify);

@@ -11,6 +11,7 @@ import WithHeaderFooter from "./components/Landing/WithHeaderFooter";
 import Profile from "./components/Applicant/Profile";
 import SignUpStartPage from "./components/SignIn_SignUp/SignUpStartPage";
 import SignInStartPage from "./components/SignIn_SignUp/SignInStartPage";
+import ForgotPasswordPage from "./components/SignIn_SignUp/ForgotPasswordPage";
 import MyApplications from "./components/Applicant/MyApplications";
 import ApplicantHomePage from "./components/Applicant/ApplicantHomePage";
 import ApplicationDetails from "./components/Applicant/ApplicationDetails";
@@ -236,6 +237,14 @@ function App() {
             element={
               <SpecialRoute>
                 <SignUpStartPage />
+              </SpecialRoute>
+            }
+          />
+                    <Route
+            path="/forgot-password"
+            element={
+              <SpecialRoute>
+                <ForgotPasswordPage />
               </SpecialRoute>
             }
           />

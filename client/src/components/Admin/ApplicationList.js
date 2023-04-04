@@ -177,7 +177,7 @@ export default function OfferingList() {
                   </select>
                 </div>
               </div>
-              {admin_type === "0" ? (
+              {/* {admin_type === "0" ? (
                 <PublishResultsModal
                   cycle_id={params.cycle_id}
                   offering_id={params.offering_id}
@@ -192,7 +192,7 @@ export default function OfferingList() {
                   isResultPublished={isResultPublished}
                   isResultPublishedByFaculty={isResultPublishedByFaculty}
                 />
-              )}
+              )} */}
             </div>
 
             <div className="flex justify-between">
@@ -248,7 +248,7 @@ export default function OfferingList() {
                 />
               </div>
             </div>
-            {isGeneratingMeritList ? (
+            {/* {isGeneratingMeritList ? (
               <div className="mx-auto m-5 w-1/2">
                 <MeritListGeneration
                   cycle_id={params.cycle_id}
@@ -260,7 +260,7 @@ export default function OfferingList() {
               </div>
             ) : (
               ""
-            )}
+            )} */}
           </div>
           <div className="block sm:flex items-center md:divide-x md:divide-gray-100">
             <div className="flex items-center sm:justify-end w-full"></div>

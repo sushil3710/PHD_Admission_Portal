@@ -8,6 +8,7 @@ const jwt = require("jsonwebtoken");
 const handlebars = require("handlebars");
 const fs = require("fs");
 const path = require("path");
+const { log } = require("console");
 
 dotenv.config();
 
@@ -86,64 +87,80 @@ const signin_otp = async (req, res) => {
 };
 
 const signin_verify = async (req, res) => {
-  const { email, otp } = req.body;
 
-  if (otp === "") return res.send({ result: 3 });
+  const { email, password } = req.body;
 
-  /** encrypt and check for otp in db and return accordingly */
-  const result = await pool.query(
-    "select * from login_verification where email_id = $1",
+  const applicantRow = await pool.query(
+    "SELECT * FROM applicants WHERE email_id = $1",
     [email]
-  );
-  const result_row = result.rows[0];
+  ).then((result) => result.rows[0]);
 
-  /** check if otp is expired */
-  if (Date.now() > new Date(result_row.expiration_time.getTime())) {
+  const adminRow = await pool.query(
+    "SELECT * FROM admins WHERE email_id = $1",
+    [email]
+  ).then((result) => result.rows[0]);
+
+  if (!applicantRow && !adminRow) {
     return res.send({ result: 2 });
   }
 
-  await bcrypt.compare(
-    otp,
-    result_row.hashed_otp,
-    async function (err, result) {
-      if (result === true) {
-        let jwtSecretKey = process.env.JWT_SECRET_KEY;
-        let data = {
+  let userData;
+  if (applicantRow) {
+   
+    //bcrypt.compare(password, applicantRow.passwd, (err, result) => 
+    if(password===applicantRow.passwd){
+  
+  
+        userData = {
           userEmail: email,
-          userRole: null,
+          userRole: 2,
           department: null,
         };
-
-        let if_admin = await pool.query(
-          "SELECT * from admins where email_id = $1",
-          [email]
-        );
-        if (if_admin.rows.length === 0) {
-          data.userRole = 2;
-          const authToken = jwt.sign(data, jwtSecretKey);
-          return res.send({ result: 1, token: authToken });
-        } else if (if_admin.rows[0].admin_type === 0) {
-          data.userRole = 0;
-          data.department = if_admin.rows[0].department;
-          const authToken = jwt.sign(data, jwtSecretKey);
-          return res.send({ result: 4, token: authToken, admin_type: 0 });
-        } else if (if_admin.rows[0].admin_type === 1) {
-          data.userRole = 1;
-          data.department = if_admin.rows[0].department;
-          const authToken = jwt.sign(data, jwtSecretKey);
-          return res.send({ result: 5, token: authToken, admin_type: 1 });
-        } else if (if_admin.rows[0].admin_type === 3) {
-          data.userRole = 3;
-          data.department = if_admin.rows[0].department;
-          const authToken = jwt.sign(data, jwtSecretKey);
-          return res.send({ result: 6, token: authToken, admin_type: 3 });
-        }
-      } else {
-        return res.send({ result: 0 });
-      }
+        const jwtSecretKey = process.env.JWT_SECRET_KEY;
+        const authToken = jwt.sign(userData, jwtSecretKey);
+        return res.send({ result: 1, token: authToken });
+ 
     }
-  );
+    else {
+      return res.send({ result: 0 });
+    }
+   
+  }
+  
+
+   if (adminRow) {
+  
+    userData = {
+      userEmail: email,
+      userRole: adminRow.admin_type,
+      department: adminRow.department,
+    };
+
+    //bcrypt.compare(password, adminRow.passwd, (err, result) => 
+    if(password===adminRow.passwd){
+    
+        const jwtSecretKey = process.env.JWT_SECRET_KEY;
+        const authToken = jwt.sign(userData, jwtSecretKey);
+
+        switch (adminRow.admin_type) {
+          case 0:
+            return res.send({ result: 3, token: authToken, admin_type: 0 });
+          case 1:
+            return res.send({ result: 4, token: authToken, admin_type: 1 });
+          case 3:
+            return res.send({ result: 5, token: authToken, admin_type: 3 });
+          default:
+            return res.send({ result: 0 });
+        }
+   
+    }   else {
+      return res.send({ result: 0 });
+    }
+  }
+
+  return res.send({ result: 0 });
 };
+
 
 const signup_otp = async (req, res) => {
   email = req.body.email;
@@ -212,7 +229,8 @@ const signup_otp = async (req, res) => {
 };
 
 const signup_verify = async (req, res) => {
-  const { email, otp } = req.body;
+  const { email, otp,password,confirm_password } = req.body;
+
 
   if (otp === "") return res.send({ result: 3 });
 
@@ -227,29 +245,200 @@ const signup_verify = async (req, res) => {
   if (Date.now() > new Date(result_row.expiration_time.getTime())) {
     return res.send({ result: 2 });
   }
+  if (password!==confirm_password) {
+    return res.send({ result: 4 });
+  }
 
-  await bcrypt.compare(
-    otp,
-    result_row.hashed_otp,
-    async function (err, result) {
-      if (result === true) {
-        await pool.query("insert into applicants(email_id) values($1)", [
-          email,
-        ]);
-        let jwtSecretKey = process.env.JWT_SECRET_KEY;
-        let data = {
-          userEmail: email,
-          userRole: 2,
-          department: null,
-        };
-        const authToken = jwt.sign(data, jwtSecretKey);
-        return res.send({ result: 1, token: authToken });
-      } else {
-        return res.send({ result: 0 });
-      }
-    }
-  );
+  const match = await bcrypt.compare(otp, result_row.hashed_otp);
+  if (match) {
+    //const hashedPassword = await bcrypt.hash(password, 10);
+    await pool.query("insert into applicants(email_id, passwd) values($1, $2)", [
+      email, password
+    ]);
+    const jwtSecretKey = process.env.JWT_SECRET_KEY;
+    const data = {
+      userEmail: email,
+      userRole: 2,
+      department: null,
+    };
+    const authToken = jwt.sign(data, jwtSecretKey);
+    return res.send({ result: 1, token: authToken });
+  } else {
+    return res.send({ result: 0 });
+  }
+
 };
+
+
+const forgot_password_otp = async (req, res) => { 
+
+  email = req.body.email;
+
+  if (email === "") return res.send("0");
+
+  const result1 = await pool.query(
+    "select * from applicants where email_id = $1",
+    [email]
+  );
+  const result2 = await pool.query(
+    "select * from admins where email_id = $1",
+    [email]
+  );
+
+  //no email registered
+ if (result1.rowCount === 0 && result2.rowCount === 0) return res.send("1");
+
+  const filePath = path.join(__dirname, "otp_email.html");
+  const html = fs.readFileSync(filePath, "utf-8").toString();
+  var template = handlebars.compile(html);
+ 
+
+  otp = otpGenerator.generate(6, { specialChars: false });
+
+  var replacements = {
+    VERIFICATION_CODE: otp,
+  };
+  var htmlToSend = template(replacements);
+
+  var mailOptions = {
+    from: "IIT Ropar",
+    to: "email_id_to_send_otp",
+    subject: "OTP To RESET Password",
+    html: htmlToSend,
+  };
+
+  mailOptions.to = email;
+  console.log(otp);
+
+  const ifexists = await pool.query(
+    "select * from forgot_password_verification where email_id = $1",
+    [email]
+  );
+
+  /** encrypt otp and save in db */
+  if (ifexists.rowCount === 0) {
+    /** First time sign-up */
+    await bcrypt.hash(otp, saltRounds, async function (err, hash) {
+      await pool.query(
+        "INSERT INTO forgot_password_verification(email_id, hashed_otp, expiration_time) VALUES($1, $2, to_timestamp($3))",
+        [email, hash, Date.now() / 1000.0 + 600]
+      );
+    });
+  } else {
+    /** If there is already an entry (helpful for resend OTP feature) */
+    await bcrypt.hash(otp, saltRounds, async function (err, hash) {
+      await pool.query(
+        "UPDATE forgot_password_verification SET hashed_otp = $1, expiration_time = to_timestamp($2) WHERE email_id = $3",
+        [hash, Date.now() / 1000.0 + 600, email]
+      );
+    });
+  }
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    }
+  });
+
+  return res.send("2");
+};
+
+
+const forgot_password_verify = async (req, res) => {
+  const { email, otp,password,confirm_password } = req.body;
+
+
+  if (otp === "") return res.send({ result: 3 });
+
+  /** encrypt and check for otp in db and return accordingly */
+  const result = await pool.query(
+    "select * from forgot_password_verification where email_id = $1",
+    [email]
+  );
+  const result_row = result.rows[0];
+
+  const result1 = await pool.query(
+    "select * from applicants where email_id = $1",
+    [email]
+  );
+const applicant_row=result1.rows[0];
+
+
+  const result2 = await pool.query(
+    "select * from admins where email_id = $1",
+    [email]
+  );
+  const admin_row=result2.rows[0];
+
+
+  /** check if otp is expired */
+  if (Date.now() > new Date(result_row.expiration_time.getTime())) {
+    return res.send({ result: 2 });
+  }
+
+  if (password!==confirm_password) {
+    return res.send({ result: 3 });
+  }
+
+  const match = await bcrypt.compare(otp, result_row.hashed_otp);
+  if (match) {
+    //const hashedPassword = await bcrypt.hash(password, 10);
+    if(applicant_row){
+    await pool.query("update applicants set passwd=$1 where email_id=$2", [
+       password, email
+    ]);
+    const jwtSecretKey = process.env.JWT_SECRET_KEY;
+    const data = {
+      userEmail: email,
+      userRole: 2,
+      department: null,
+    };
+    const authToken = jwt.sign(data, jwtSecretKey);
+    return res.send({ result: 1, token: authToken });
+  }
+
+  if(admin_row){
+    await pool.query("update admins set passwd=$1 where email_id=$2", [
+      password, email
+   ]);
+
+   userData = {
+    userEmail: email,
+    userRole: admin_row.admin_type,
+    department: admin_row.department,
+  };
+
+
+  
+      const jwtSecretKey = process.env.JWT_SECRET_KEY;
+      const authToken = jwt.sign(userData, jwtSecretKey);
+
+      switch (admin_row.admin_type) {
+        case 0:
+         
+          return res.send({ result: 4, token: authToken, admin_type: 0 });
+        case 1:
+        
+          return res.send({ result: 5, token: authToken, admin_type: 1 });
+        case 3:
+        
+          return res.send({ result: 6, token: authToken, admin_type: 3 });
+        default:
+          return res.send({ result: 0 });
+      }
+
+  }
+
+
+  } 
+  else {
+    return res.send({ result: 0 });
+  }
+
+};
+
+
+
 
 const contact_us = async (req, res) => {
   const info = req.body;
@@ -302,6 +491,8 @@ module.exports = {
   signin_verify,
   signup_otp,
   signup_verify,
+  forgot_password_otp,
+  forgot_password_verify,
   contact_us,
   application_submission,
 };

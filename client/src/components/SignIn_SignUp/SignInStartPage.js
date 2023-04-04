@@ -9,85 +9,89 @@ import { useNavigate, Link } from "react-router-dom";
 function SignInStartPage() {
   const navigate = useNavigate();
 
-  const [otpSent, setotpSent] = useState(false);
+
   const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
-  const [msg_otp, setMsgOtp] = useState(
-    "OTP has been sent to your mail account. Please check your spam folder also."
-  );
+  const [pass, setPass] = useState("");
+  // const [msg_otp, setMsgOtp] = useState(
+  //   "Enter Email and Password"
+  // );
   const [msg_signin, setMsgSignin] = useState(
-    "An OTP will be sent to your email ID for verification."
+    "Enter Email and Password"
   );
   const [colorEmail, setColorEmail] = useState(0);
-  const [colorOTP, setColorOTP] = useState(0);
-  const [isLoadingEmail, setIsLoadingEmail] = useState(false);
-  const [isLoadingOTP, setIsLoadingOTP] = useState(false);
+  const [colorPass, setColorPass] = useState(0);
+   const [isLoadingEmail, setIsLoadingEmail] = useState(false);
+  //const [isLoadingOTP, setIsLoadingOTP] = useState(false);
 
-  const emailSubmit = () => {
-    setIsLoadingEmail(true);
-    axios.post("/auth/signin/otp", { email: email }).then((response) => {
-      if (response.data === 0) {
-        setMsgSignin("Please enter your email.");
-        setColorEmail(1);
-        setIsLoadingEmail(false);
-      } else if (response.data === 1) {
-        setMsgSignin("You do not have an account. Sign-up first!");
-        setColorEmail(1);
-        setIsLoadingEmail(false);
-      } else {
-        setotpSent(!otpSent);
-        setColorOTP(2);
-      }
-    });
-  };
+  // const emailSubmit = () => {
+  //  // setIsLoadingEmail(true);
+  //   axios.post("/auth/signin/otp", { email: email }).then((response) => {
+  //     if (response.data === 0) {
+  //       setMsgSignin("Please enter your email.");
+  //       setColorEmail(1);
+  //       setIsLoadingEmail(false);
+  //     } else if (response.data === 1) {
+  //       setMsgSignin("You do not have an account. Sign-up first!");
+  //       setColorEmail(1);
+  //       setIsLoadingEmail(false);
+  //     } else {
+  //       setotpSent(!otpSent);
+  //       setColorOTP(2);
+  //     }
+  //   });
+  // };
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
   };
-
-  const updateOTP = (e) => {
-    setOtp(e.target.value);
+  const updatePass = (e) => {
+    setPass(e.target.value);
   };
 
-  const resendOTP = () => {
-    axios.post("/auth/signin/otp", { email: email });
-    setMsgOtp("OTP has been resent to your mail account.");
-    setColorOTP(2);
-  };
+  // const updateOTP = (e) => {
+  //   setOtp(e.target.value);
+  // };
+
+  // const resendOTP = () => {
+  //   axios.post("/auth/signin/otp", { email: email });
+  //   setMsgOtp("OTP has been resent to your mail account.");
+  //   setColorOTP(2);
+  // };
 
   const handleSubmit = () => {
-    setIsLoadingOTP(true);
+    console.log("handleSubmit called");
+   setIsLoadingEmail(true);
     axios
       .post("/auth/signin/verify", {
         email: email,
-        otp: otp,
+        password: pass
       })
       .then((response) => {
+        setIsLoadingEmail(false);
         if (response.data.result === 1) {
           setUserSession(response.data.token);
           navigate("/home");
         } else if (
           response.data.result === 4 ||
           response.data.result === 5 ||
-          response.data.result === 6
+          response.data.result === 3
         ) {
           setUserSession(response.data.token);
           setAdminType(response.data.admin_type);
           navigate("/admin/dashboard");
         } else if (response.data.result === 2) {
-          setMsgOtp("This OTP has expired.");
-          setColorOTP(1);
-          setIsLoadingOTP(false);
-        } else if (response.data.result === 3) {
-          setMsgOtp("Please enter the OTP sent to your email.");
-          setColorOTP(1);
-          setIsLoadingOTP(false);
-        } else {
-          setMsgOtp("The OTP you entered is incorrect.");
-          setColorOTP(1);
-          setIsLoadingOTP(false);
+          setMsgSignin("Email not registered, Sign-Up first.");
+          setColorEmail(1);
+          setColorPass(1);
+          setIsLoadingEmail(false);
+         }
+         else {
+          setMsgSignin("Incorrect Password");
+          setColorPass(1);
+          setIsLoadingEmail(false);
         }
-      });
+        }
+      );
   };
 
   return (
@@ -112,31 +116,32 @@ function SignInStartPage() {
 
             <div className="mt-5">
               <div>
-                {otpSent === false && (
+                {(
                   <SignIn
-                    onClick={emailSubmit}
-                    updateData={updateEmail}
+                    onClick={handleSubmit}
+                    updateEmail={updateEmail}
+                    updatePassword={updatePass}
                     msg={msg_signin}
-                    colorChange={colorEmail}
+                    colorChange={colorEmail} 
                     isLoading={isLoadingEmail}
                   />
                 )}
-                {otpSent === true && (
-                  <Otp
-                    onClick={handleSubmit}
-                    updateData={updateOTP}
-                    msg={msg_otp}
-                    resendOTP={resendOTP}
-                    colorChange={colorOTP}
-                    isLoading={isLoadingOTP}
-                  />
-                )}
+
               </div>
 
               <div className="flex mt-7 items-center text-center">
                 <hr className="border-gray-300 border-1 w-full rounded-md" />
               </div>
               <div className="mt-7">
+              <div className="flex justify-center items-center">
+                  {/* <label className="mr-2">Do not have an account? </label> */}
+                  <Link
+                    to="/forgot-password"
+                    className=" text-blue-500 transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105"
+                  >
+                    Forgot Password
+                  </Link>
+                </div>
                 <div className="flex justify-center items-center">
                   <label className="mr-2">Do not have an account? </label>
                   <Link

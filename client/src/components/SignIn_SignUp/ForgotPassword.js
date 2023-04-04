@@ -1,9 +1,9 @@
 import React from "react";
 import spinner from "../../images/SpinnerWhite.gif";
-import iit_ropar_pic from "../../images/iit-ropar.jpg";
-import pic from "../../images/iit-ropar-logo.jpg";
+// import iit_ropar_pic from "../../images/iit-ropar.jpg";
+// import pic from "../../images/iit-ropar-logo.jpg";
 
-export default function SignIn(props) {
+export default function ForgotPassword(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.onClick();
@@ -45,26 +45,11 @@ export default function SignIn(props) {
               required
               className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
-              onChange={props.updateEmail}
+              onChange={props.updateData}
             />
           </div>
         </div>
-        <div className="my-2 rounded shadow-sm -space-y-px">
-          <div>
-            <label htmlFor="email-address" className="sr-only">
-              Password
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              required
-              className="appearance-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Password"
-              onChange={props.updatePassword}
-            />
-          </div>
-        </div>
+    
 
         <div>
           {!props.isLoading ? (
@@ -72,7 +57,7 @@ export default function SignIn(props) {
               type="submit"
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Submit
+              Get OTP
             </button>
           ) : (
             <button

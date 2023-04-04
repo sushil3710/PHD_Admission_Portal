@@ -96,6 +96,11 @@ async function generate_applications_in_excel(info) {
     "marksheet_12th_url",
     "self_attested_copies_url",
     "signature_url",
+    'noc_pdf',
+    'sop_pdf',
+    'letter_pi_pdf',
+    'exam_result_pdf',
+    'publications_pdf'
   ];
 
   /** Write data */
@@ -104,23 +109,27 @@ async function generate_applications_in_excel(info) {
     for (var i = 0; i < column_list.length; i++) {
       if (
         element[column_list[i]] !== null &&
-        element[column_list[i]] != "null"
+        element[column_list[i]] != "null" && 
+        element[column_list[i]] !== "undefined"
       ) {
         if (number_fields.indexOf(column_list[i]) > -1) {
           worksheet
             .cell(rowCount, columnIndex)
             .number(+element[column_list[i]])
             .style(style);
+
+            
         } else if (link_fields.indexOf(column_list[i]) > -1) {
           worksheet
             .cell(rowCount, columnIndex)
             .link(element[column_list[i]])
             .style(link_style);
+
         } else {
           worksheet
             .cell(rowCount, columnIndex)
             .string(String(element[column_list[i]]))
-            .style(style);
+            .style(style);        
         }
       }
       columnIndex++;
@@ -169,5 +178,6 @@ const get_applications_in_excel = async (req, res) => {
 };
 
 module.exports = {
+  // generate_applications_in_excel,
   get_applications_in_excel,
 };
