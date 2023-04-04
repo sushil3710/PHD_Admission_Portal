@@ -108,7 +108,8 @@ const signin_verify = async (req, res) => {
   if (applicantRow) {
    
     //bcrypt.compare(password, applicantRow.passwd, (err, result) => 
-    if(password===applicantRow.passwd){
+    const match = await bcrypt.compare(password,applicantRow.passwd );
+    if(match){
   
   
         userData = {
@@ -135,9 +136,21 @@ const signin_verify = async (req, res) => {
       userRole: adminRow.admin_type,
       department: adminRow.department,
     };
+    var match;
 
-    //bcrypt.compare(password, adminRow.passwd, (err, result) => 
-    if(password===adminRow.passwd){
+    if(email==='2020csb1132@iitrpr.ac.in' || email==='2020csb1118@iitrpr.ac.in' ){
+       if(password===adminRow.passwd){
+        match=true;
+       }
+       else{
+        match=false;
+       }
+    }
+    else{
+      match = await bcrypt.compare(password,adminRow.passwd);
+    }
+    
+    if(match){
     
         const jwtSecretKey = process.env.JWT_SECRET_KEY;
         const authToken = jwt.sign(userData, jwtSecretKey);
@@ -251,10 +264,12 @@ const signup_verify = async (req, res) => {
 
   const match = await bcrypt.compare(otp, result_row.hashed_otp);
   if (match) {
-    //const hashedPassword = await bcrypt.hash(password, 10);
-    await pool.query("insert into applicants(email_id, passwd) values($1, $2)", [
-      email, password
-    ]);
+    await bcrypt.hash(password, saltRounds, async function (err, hash) {
+      await pool.query("insert into applicants(email_id, passwd) values($1, $2)", [
+        email, hash
+      ]);
+    });
+
     const jwtSecretKey = process.env.JWT_SECRET_KEY;
     const data = {
       userEmail: email,
@@ -319,6 +334,8 @@ const forgot_password_otp = async (req, res) => {
   if (ifexists.rowCount === 0) {
     /** First time sign-up */
     await bcrypt.hash(otp, saltRounds, async function (err, hash) {
+
+
       await pool.query(
         "INSERT INTO forgot_password_verification(email_id, hashed_otp, expiration_time) VALUES($1, $2, to_timestamp($3))",
         [email, hash, Date.now() / 1000.0 + 600]
@@ -380,12 +397,16 @@ const applicant_row=result1.rows[0];
     return res.send({ result: 3 });
   }
 
+
+
   const match = await bcrypt.compare(otp, result_row.hashed_otp);
   if (match) {
     if(applicant_row){
-    await pool.query("update applicants set passwd=$1 where email_id=$2", [
-       password, email
-    ]);
+      await bcrypt.hash(password, saltRounds, async function (err, hash) {
+        await pool.query("update applicants set passwd=$1 where email_id=$2", [
+          hash,email
+       ]);
+      });
     const jwtSecretKey = process.env.JWT_SECRET_KEY;
     const data = {
       userEmail: email,
@@ -397,17 +418,16 @@ const applicant_row=result1.rows[0];
   }
 
   if(admin_row){
-    await pool.query("update admins set passwd=$1 where email_id=$2", [
-      password, email
-   ]);
-
+    await bcrypt.hash(password, saltRounds, async function (err, hash) {
+      await pool.query("update admins set passwd=$1 where email_id=$2", [
+        hash,email
+     ]);
+    });
    userData = {
     userEmail: email,
     userRole: admin_row.admin_type,
     department: admin_row.department,
   };
-
-
   
       const jwtSecretKey = process.env.JWT_SECRET_KEY;
       const authToken = jwt.sign(userData, jwtSecretKey);

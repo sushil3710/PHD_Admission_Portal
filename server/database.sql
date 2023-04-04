@@ -284,5 +284,5 @@ INSERT INTO current_cycle(cycle_id) VALUES(0);
 INSERT INTO admins(name, email_id,passwd, admin_type, department) VALUES('Rohit',  '2020csb1118@iitrpr.ac.in','root', 0, '{Academics}');
 INSERT INTO admins(name, email_id,passwd ,admin_type, department) VALUES('Sushil', '2020csb1132@iitrpr.ac.in','root', 0, '{Academics}');
 INSERT INTO admins(name, email_id,passwd ,admin_type, department) VALUES('Shruti', '2020csb1128@iitrpr.ac.in','root', 0, '{Academics}');
-INSERT INTO admins(name, email_id,passwd, admin_type, department) VALUES('tanish', '2020csb1133@iitrpr.ac.in','root', 0, '{Academics}');
+INSERT INTO admins(name, email_id,passwd, admin_type, department) VALUES('Tanish', '2020csb1133@iitrpr.ac.in','root', 0, '{Academics}');
 
