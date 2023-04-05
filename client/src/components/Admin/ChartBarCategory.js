@@ -84,7 +84,7 @@ export default function ChartBar(props) {
     return () => {
       window.myBar1.destroy();
     };
-  }, [props.displayData]);
+  }, [props.displayData, props.labels]);
 
   return (
     <Card>

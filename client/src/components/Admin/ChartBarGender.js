@@ -83,7 +83,7 @@ export default function ChartBarGender(props) {
     return () => {
       window.myBar2.destroy();
     };
-  }, [props.displayData]);
+  }, [props.displayData, props.labels]);
 
   return (
     <Card>

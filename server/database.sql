@@ -183,7 +183,7 @@ INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES
 'interdisciplinary_prog_check' ,'interdisciplinary_prog_name','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','noc_pdf','sop_pdf',
 'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
 ,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
-,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','exam_result_pdf', 
 'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
@@ -200,7 +200,7 @@ INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES
 'interdisciplinary_prog_check' ,'interdisciplinary_prog_name','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','noc_pdf','sop_pdf',
 'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
 ,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
-,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','exam_result_pdf', 
 'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
@@ -217,7 +217,7 @@ INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES
 'interdisciplinary_prog_check' ,'interdisciplinary_prog_name','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','noc_pdf','sop_pdf',
 'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
 ,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
-,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','exam_result_pdf', 
 'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
@@ -234,7 +234,7 @@ INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES
 'year_of_passing_12th', 'remarks_12th', 'marksheet_12th_url', 'degrees', 'other_remarks', 'is_last_degree_completed','transaction_id','bachelor_degree_complete','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','resume_pdf','sop_pdf',
 'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
 ,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
-,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','exam_result_pdf', 
 'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
@@ -251,7 +251,7 @@ INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES
 'year_of_passing_12th', 'remarks_12th', 'marksheet_12th_url', 'degrees', 'other_remarks', 'is_last_degree_completed','transaction_id','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','noc_pdf','resume_pdf','sop_pdf',
 'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
 ,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
-,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','exam_result_pdf', 
 'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
@@ -268,7 +268,7 @@ INSERT INTO TEMPLATES(email_id,name,type,column_list,column_list_compact) VALUES
 'year_of_passing_12th', 'remarks_12th', 'marksheet_12th_url', 'degrees', 'other_remarks', 'is_last_degree_completed','transaction_id',' pi_project_number','area_of_research','first_pref','second_pref','third_pref','fourth_pref','specific_research_area','letter_pi__pdf','sop_pdf',
 'qualifying_examination_1', 'branch_code_1', 'year_1','valid_upto_1', 'all_india_rank_1', 'score_1' 
 ,'qualifying_examination_2', 'branch_code_2', 'year_2','valid_upto_2', 'all_india_rank_2', 'score_2'
-,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','self_attested_copies_url', 
+,'qualifying_examination_3', 'branch_code_3', 'year_3','valid_upto_3', 'all_india_rank_3', 'score_3','exam_result_pdf', 
 'signature_url','date_of_declaration', 'place_of_declaration','pi_project_number',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',
 'name_of_working_org_1','designation_1','duration_post_start_1','duration_post_end_1','nature_of_work_1',

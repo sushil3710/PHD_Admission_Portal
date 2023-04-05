@@ -9,6 +9,14 @@ var express = require('express');
 const { log } = require("console");
 var app = express();
 dotenv.config();
+
+const upDir = path.join(__dirname, 'public');
+if (!fs.existsSync(upDir)) {
+  fs.mkdirSync(upDir);
+  console.log(upDir);
+}
+
+
 const uploadDir = path.join(__dirname, 'public', 'MtechAdmissions');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
