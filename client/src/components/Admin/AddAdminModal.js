@@ -47,12 +47,13 @@ export default function AddAdminModal() {
     { value: "Biomedical Engineering", label: "Biomedical Engineering" },
     { value: "Chemical Engineering", label: "Chemical Engineering" },
     { value: "Civil Engineering", label: "Civil Engineering" },
-    {
-      value: "Computer Science and Engineering",
-      label: "Computer Science and Engineering",
-    },
+    {value: "Computer Science and Engineering",label: "Computer Science and Engineering",},
     { value: "Electrical Engineering", label: "Electrical Engineering" },
     { value: "Mechanical Engineering", label: "Mechanical Engineering" },
+    { value: "Chemisty", label: "Chemistry" },
+    { value: "Humanities and Social Sciences", label: "Humanities and Social Sciences" },
+    { value: "Metallurgical and Material Engineering", label: "Metallurgical and Material Engineering" },
+    {value : "Physics" , label : "Physics"}
   ];
 
   const [open, setOpen] = React.useState(false);

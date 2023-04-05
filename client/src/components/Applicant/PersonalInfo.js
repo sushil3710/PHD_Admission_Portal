@@ -754,8 +754,7 @@ export default function PersonalInfo(props) {
                                   htmlFor="spouse_occupation"
                                   className="block text-sm font-medium text-gray-700"
                                 >
-                                  Is spouse working in government organization:
-                                  <span style={{ color: "#ff0000" }}> *</span>
+                                  Is spouse working in government organization?
                                 </label>
                                 <select
                                   value={props.localProfileInfo.spouse_occupation}
@@ -764,7 +763,6 @@ export default function PersonalInfo(props) {
                                   }
                                   id="spouse_occupation"
                                   name="spouse_occupation"
-                                  required
                                   className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 >
                                   <option value="">None</option>

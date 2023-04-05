@@ -1,4 +1,4 @@
--- Active: 1676652978326@@127.0.0.1@5432@AIMS
+-- Active: 1680672093458@@127.0.0.1@5432@mtech
 CREATE TABLE signup_verification (
     email_id TEXT PRIMARY KEY,
     hashed_otp TEXT,

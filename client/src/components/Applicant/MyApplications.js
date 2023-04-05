@@ -69,6 +69,12 @@ function MyApplications(props) {
                           scope="col"
                           className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
+                          Apllication For
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
                           Deadline
                         </th>
                         <th
@@ -120,6 +126,11 @@ function MyApplications(props) {
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
                               <div className="text-sm text-gray-500">
+                                {application.offering_type}
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="text-sm text-gray-500">
                                 {new Date(
                                   application.deadline
                                 ).toLocaleDateString("en-GB")}
@@ -160,16 +171,7 @@ function MyApplications(props) {
                                 </span>
                               )}
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                              <ViewModal
-                                header={"Remarks"}
-                                data={
-                                  application.is_result_published === 1
-                                    ? application.status_remark
-                                    : "The results are not out yet!"
-                                }
-                              />
-                            </td>
+                            
                             <td className="px-6 py-4 whitespace-nowrap font-medium">
                               <Link
                                 to={"/view/" + application.application_id}

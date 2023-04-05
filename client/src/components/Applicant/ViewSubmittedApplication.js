@@ -5,6 +5,7 @@ import { getToken } from "../SignIn_SignUp/Sessions";
 import { useNavigate, useParams } from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DownloadIcon from "@mui/icons-material/Download";
+import pic_clear from "../../images/iit-ropar-logo-clear.png";
 
 export default function ViewSubmittedApplication() {
   const navigate = useNavigate();
@@ -73,6 +74,9 @@ export default function ViewSubmittedApplication() {
             <h3 className="text-lg leading-6 font-medium text-gray-900">
               Application Details
             </h3>
+            <div className="h-12 w-12 ml-auto flex-shrink-0">
+              <img src={pic_clear} alt="IIT Ropar"></img>
+            </div>
           </div>
 
           <div className="border-t border-gray-200">

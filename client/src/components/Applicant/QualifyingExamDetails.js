@@ -54,7 +54,7 @@ function QualifyingExamDetails(props) {
                         >
                           Qualifying Examination
                         </label>
-                        {props.offering.department == "Computer Science and Engineering" ?
+                        {props.offering.department == "Computer Science and Engineering" && (props.offering.offering_type === "Regular/External/Part Time" || props.offering.offering_type === "Direct") ?
                           (<> <input
                             id="qualifying_examination_1"
                             value="GATE"
@@ -75,7 +75,7 @@ function QualifyingExamDetails(props) {
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
-                        {props.offering.department == "Computer Science and Engineering" ?
+                        {props.offering.department == "Computer Science and Engineering" && (props.offering.offering_type === "Regular/External/Part Time" || props.offering.offering_type === "Direct") ?
                           (<>
                             <label
                               htmlFor="branch_code_1"
@@ -191,8 +191,8 @@ function QualifyingExamDetails(props) {
                           htmlFor="score_1"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          GATE Score
-                          <HtmlTooltip
+                          Score
+                          {/* <HtmlTooltip
                             title={
                               <React.Fragment>
                                 <Typography color="inherit"></Typography>
@@ -204,7 +204,7 @@ function QualifyingExamDetails(props) {
                             }
                           >
                             <HelpIcon fontSize="small"></HelpIcon>
-                          </HtmlTooltip>
+                          </HtmlTooltip> */}
                         </label>
                         <input
                           type="number"
@@ -229,7 +229,7 @@ function QualifyingExamDetails(props) {
                         >
                           Qualifying Examination
                         </label>
-                        {props.offering.department == "Computer Science and Engineering" ?
+                        {props.offering.department == "Computer Science and Engineering" && (props.offering.offering_type === "Regular/External/Part Time" || props.offering.offering_type === "Direct") ?
                           (<> <input
                             id="qualifying_examination_2"
                             value="GATE"
@@ -250,7 +250,7 @@ function QualifyingExamDetails(props) {
                       </div>
 
                       <div className="col-span-6 sm:col-span-3">
-                        {props.offering.department == "Computer Science and Engineering" ?
+                        {props.offering.department == "Computer Science and Engineering" && (props.offering.offering_type === "Regular/External/Part Time" || props.offering.offering_type === "Direct") ?
                           (<>
                             <label
                               htmlFor="branch_code_2"
@@ -365,8 +365,8 @@ function QualifyingExamDetails(props) {
                           htmlFor="score_2"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          GATE Score
-                          <HtmlTooltip
+                          Score
+                          {/* <HtmlTooltip
                             title={
                               <React.Fragment>
                                 <Typography color="inherit"></Typography>
@@ -378,7 +378,7 @@ function QualifyingExamDetails(props) {
                             }
                           >
                             <HelpIcon fontSize="small"></HelpIcon>
-                          </HtmlTooltip>
+                          </HtmlTooltip> */}
                         </label>
                         <input
                           type="number"
@@ -494,8 +494,8 @@ function QualifyingExamDetails(props) {
                           htmlFor="score_3"
                           className="block text-sm font-medium text-gray-700"
                         >
-                          GATE Score
-                          <HtmlTooltip
+                          Score
+                          {/* <HtmlTooltip
                             title={
                               <React.Fragment>
                                 <Typography color="inherit"></Typography>
@@ -507,7 +507,7 @@ function QualifyingExamDetails(props) {
                             }
                           >
                             <HelpIcon fontSize="small"></HelpIcon>
-                          </HtmlTooltip>
+                          </HtmlTooltip> */}
                         </label>
                         <input
                           type="number"

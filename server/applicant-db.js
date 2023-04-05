@@ -691,9 +691,7 @@ const save_application_info = async (req, res, next) => {
               [url, email]
             );
           }
-
           resolve();
-
         });
       })
     );
@@ -901,7 +899,7 @@ const get_applications = async (req, res) => {
     "SELECT application_id, " +
     "phd_offerings_" +
     cycle_id +
-    ".offering_id, deadline,  department, specialization, status, status_remark, is_result_published, is_accepting_applications FROM applications_" +
+    ".offering_id, deadline, offering_type, department, specialization, status, status_remark, is_result_published, is_accepting_applications FROM applications_" +
     cycle_id +
     ", phd_offerings_" +
     cycle_id +

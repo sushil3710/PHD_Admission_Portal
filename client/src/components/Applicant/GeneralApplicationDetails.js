@@ -615,7 +615,6 @@ function ExperienceAndPublications(props) {
                                                         htmlFor="noc_pdf"
                                                     >
                                                         Upload your NOC (if applying for admission other than regular PhD)
-                                                        <span style={{ color: "#ff0000" }}> *</span>
                                                     </label>
                                                     {!props.details[61].name && (
                                                         <>
@@ -624,7 +623,6 @@ function ExperienceAndPublications(props) {
                                                                 aria-describedby="profile-picture-desc"
                                                                 id="noc_pdf"
                                                                 name="noc_pdf"
-                                                                required
                                                                 type="file"
                                                                 accept=".pdf"
                                                                 onChange={(e) =>
@@ -677,7 +675,6 @@ function ExperienceAndPublications(props) {
                                                                     id="noc_pdf"
                                                                     name="noc_pdf"
                                                                     type="text"
-                                                                    required
                                                                     value={props.details[61].name}
                                                                     readOnly
                                                                 />
@@ -1144,8 +1141,8 @@ function ExperienceAndPublications(props) {
                                                             </span>
                                                             <span>
                                                                 {" "}
-                                                                Statement_of_purpose_&lt;your_email_id&gt; <br />
-                                                                For Example: Letter_of_recom_abc@gmail.com
+                                                                sop_&lt;your_email_id&gt; <br />
+                                                                For Example: sop_abc@gmail.com
                                                             </span>
                                                         </div>
                                                     </>

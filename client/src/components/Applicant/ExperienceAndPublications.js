@@ -272,7 +272,7 @@ function ExperienceAndPublications(props) {
                                     </div>
 
 
-                                        {props.offering.department == "Computer Science and Engineering" ?
+                                    {props.offering.department == "Computer Science and Engineering" && (props.offering.offering_type === "Regular/External/Part Time" || props.offering.offering_type === "Direct") ?
                                         (<>
                                             <div className="px-4 bg-white sm:p-6">
                                                 <div className="grid grid-cols-6 gap-6">
