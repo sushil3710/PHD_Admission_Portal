@@ -225,21 +225,7 @@ export default function OfferingList() {
                 </div>
                 <span className="ml-2 mt-7 text-sm">entries</span>
               </div>
-              <div className="flex gap-2">
-                <UploadResultModal
-                  cycle_id={params.cycle_id}
-                  offering_id={params.offering_id}
-                />
-                <Tooltip title="Download Results">
-                  <button
-                    onClick={() => setIsGeneratingMeritList(true)}
-                    type="button"
-                    className="focus:outline-none w-1/2 text-white bg-emerald-600 hover:bg-emerald-700 focus:ring-4 focus:ring-emerald-200 font-medium inline-flex items-center justify-center rounded-lg text-sm my-4 px-3 py-2 text-center sm:w-auto"
-                  >
-                    <AssessmentIcon fontSize="small" className="mr-1" />
-                    Results
-                  </button>
-                </Tooltip>
+              <div className="flex gap-2 mx-5">
                 <ExportExcelModal
                   cycle_id={params.cycle_id}
                   offering_id={params.offering_id}
@@ -290,7 +276,29 @@ export default function OfferingList() {
                       scope="col"
                       className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
                     >
-                      Status
+                      Application Type
+                    </th>
+                    <th
+                      scope="col"
+                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
+                    >
+                     Department
+                    </th>
+                    <th
+                      scope="col"
+                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
+                    >
+                      Specialization
+                    </th>
+                    <th
+                      scope="col"
+                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
+                    >
+                    </th>
+                    <th
+                      scope="col"
+                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
+                    >
                     </th>
                     <th scope="col" className="p-4"></th>
                   </tr>
@@ -315,6 +323,21 @@ export default function OfferingList() {
                             {applications[i].email_id}
                           </div>
                         </td>
+                        <td className="p-4 w-1/5 text-left text-sm text-gray-500 tracking-wider">
+                          <div className="w-full break-all">
+                            {applications[i].applying_for}
+                          </div>
+                        </td><td className="p-4 w-1/5 text-left text-sm text-gray-500 tracking-wider">
+                          <div className="w-full break-all">
+                            {applications[i].department_name}
+                          </div>
+                        </td>
+                        <td className="p-4 w-1/5 text-left text-sm text-gray-500 tracking-wider">
+                          <div className="w-full break-all">
+                            {applications[i].specialization_name}
+                          </div>
+                        </td>
+                        <td className="p-4 text-left text-sm text-gray-500 tracking-wider"></td>
                         <td className="p-4 text-left text-sm text-gray-500 tracking-wider"></td>
                         <td className="p-6 whitespace-nowrap space-x-2 flex">
                           <Link

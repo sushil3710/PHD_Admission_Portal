@@ -79,17 +79,18 @@ function ReApplicantionDetails() {
   }, []);
 
   const init_application_details = () => {
-    const array = Array.from({ length: 65 }, () => "");
-
+    const array = Array.from({ length: 66 }, () => "");
+    if (offering.department == "Computer Science and Engineering") {
+      array[5] = "GATE";
+      array[11] = "GATE";
+    }
+    console.log(offering);
     array[4] = changeDateFormat();
     array[23] = changeDateFormat();
     array[27] = changeDateFormat();
     array[28] = changeDateFormat();
     array[32] = changeDateFormat();
     array[33] = changeDateFormat();
-    array[52] = offering.department;
-    array[53] = offering.specialization;
-    array[54] = offering.offering_type;
     array[55] = params.offering_id;
     return array;
   };
@@ -160,6 +161,13 @@ function ReApplicantionDetails() {
   function handleApplicationSubmit() {
     setIsLoading(true);
     const formData = new FormData();
+    if (offering.department == "Computer Science and Engineering") {
+      applicant_details[5] = "GATE";
+      applicant_details[11] = "GATE";
+    }
+    applicant_details[52] = offering.department;
+    applicant_details[53] = offering.specialization;
+    applicant_details[54] = offering.offering_type;
 
     formData.append("applicant_details", JSON.stringify(applicant_details));
     formData.append("signature", applicant_details[57]);
@@ -245,7 +253,6 @@ function ReApplicantionDetails() {
                 1: (
                   <GeneralApplicationDetails
                     increasePageNumber={increasePageNumber}
-                    decreasePageNumber={decreasePageNumber}
                     offering={offering}
                     details={applicant_details}
                     onChange={handleApplicantDetailsChange}
@@ -255,12 +262,9 @@ function ReApplicantionDetails() {
                 ),
                 2: (
                   <QualifyingExamDetails
-                    hasFilledHighestGate={hasFilledHighestGate}
-                    setHasFilledHighestGate={setHasFilledHighestGate}
-                    hasGivenMultipleGates={hasGivenMultipleGates}
-                    setHasGivenMultipleGates={setHasGivenMultipleGates}
-                    offering={offering}
                     increasePageNumber={increasePageNumber}
+                    decreasePageNumber={decreasePageNumber}
+                    offering={offering}
                     details={applicant_details}
                     onChange={handleApplicantDetailsChange}
                     handleFileSubmit={handleFileSubmit}

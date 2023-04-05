@@ -420,7 +420,7 @@ function AdmissionCycles() {
                               htmlFor="brochure"
                               className="text-sm font-medium"
                             >
-                              Brochure for M.Tech. Admissions
+                              Brochure for PHD Admissions
                             </label>
                             <div className="relative mt-1">
                               <input
@@ -433,26 +433,6 @@ function AdmissionCycles() {
                               />
                             </div>
                           </div>
-
-                          <div>
-                            <label
-                              htmlFor="ranklist"
-                              className="text-sm font-medium"
-                            >
-                              GATE opening and closing score
-                            </label>
-                            <div className="relative mt-1">
-                              <input
-                                type="text"
-                                id="ranklist"
-                                onChange={(e) => setRanklist(e.target.value)}
-                                className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                                placeholder="Public URL of the opening-closing-score PDF"
-                                required
-                              />
-                            </div>
-                          </div>
-
                           <div className="p-3">
                             <FormControlLabel
                               control={

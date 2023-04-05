@@ -363,22 +363,6 @@ export default function EditAdmissionCycleModal(props) {
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="ranklist" className="text-sm font-medium">
-                  GATE opening and closing score
-                </label>
-                <div className="relative mt-1">
-                  <input
-                    type="text"
-                    id="rank_list_url"
-                    {...register("rank_list_url")}
-                    className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
-                    placeholder="Public URL of the opening-closing-score PDF"
-                    required
-                  />
-                </div>
-              </div>
-
               <div className="p-3">
                 <FormControlLabel
                   control={

@@ -520,7 +520,7 @@ const get_offering_applications = async (req, res) => {
   }
 
   const offering_details = await pool.query(
-    "SELECT specialization, is_result_published, is_result_published_by_faculty FROM phd_offerings_" +
+    "SELECT specialization,offering_type, is_result_published, is_result_published_by_faculty FROM phd_offerings_" +
     cycle_id +
     " WHERE offering_id = $1;",
     [offering_id]

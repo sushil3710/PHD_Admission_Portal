@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const auth = require("./auth.js");
 const fs = require("fs");
 var express = require('express');
+const { log } = require("console");
 var app = express();
 dotenv.config();
 const uploadDir = path.join(__dirname, 'public', 'MtechAdmissions');
@@ -1020,16 +1021,15 @@ const reapply_save_application_info = async (req, res, next) => {
   let cycle_id = cycle.rows[0].cycle_id;
 
   var info = req.body;
-
+  app_details = JSON.parse(info.applicant_details);
   /*Delete application using Email ID and Offering ID*/
+  
   const results = await pool.query(
     "DELETE from applications_" +
     cycle_id +
     " WHERE email_id = $1 AND offering_id = $2",
-    [email, info.offering_id]
+    [email, app_details[55]]
   );
-
-  app_details = JSON.parse(info.applicant_details);
 
   const app_save_result = await pool.query(
     "INSERT INTO applications_" +
