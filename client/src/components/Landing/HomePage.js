@@ -47,12 +47,12 @@ function HomePage() {
             {isCyclePresent ? (
               <p className="text-center mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
                 Indian Institute of Technology Ropar invites applications for
-                MTech programmes for {cycleDuration.duration_start}-
+                PHD programmes for {cycleDuration.duration_start}-
                 {cycleDuration.duration_end}.
               </p>
             ) : (
               <p className="text-center mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl">
-                Applications for Mtech programmes are currently closed.
+                Applications for PHD programmes are currently closed.
               </p>
             )}
             <div className="mt-5 sm:mt-8 sm:flex sm:justify-center">

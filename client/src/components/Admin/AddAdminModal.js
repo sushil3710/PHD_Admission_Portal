@@ -53,7 +53,7 @@ export default function AddAdminModal() {
     { value: "Chemisty", label: "Chemistry" },
     { value: "Humanities and Social Sciences", label: "Humanities and Social Sciences" },
     { value: "Metallurgical and Material Engineering", label: "Metallurgical and Material Engineering" },
-    {value : "Physics" , label : "Physics"}
+    {value : "Physics" , label : "Physics"},
   ];
 
   const [open, setOpen] = React.useState(false);
