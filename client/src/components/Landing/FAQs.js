@@ -71,7 +71,7 @@ comprehensive examination.
             className="mb-4 collapse border border-base-300 bg-base-100 hover:bg-gray-100 rounded-lg collapse-plus"
           >
             <div className="collapse-title text-lg font-medium">
-              In what fields, can PhD can be pursued?
+              In what fields, can PhD be pursued?
             </div>
             <div className="collapse-content">
               <p>
