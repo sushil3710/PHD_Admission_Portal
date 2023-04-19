@@ -5,6 +5,7 @@ import AdminNavbar from "./AdminNavbar";
 import Icon from "@material-tailwind/react/Icon";
 import H6 from "@material-tailwind/react/Heading6";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import EmailIcon from '@mui/icons-material/Email';
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import PostAddIcon from "@mui/icons-material/PostAdd";
@@ -89,7 +90,26 @@ export default function AdminNavbarWithSidebar() {
                     Admins
                   </NavLink>
                 </li>
-              )}
+                
+              ) 
+              }
+              {admin_type === "0" &&( 
+              <li className="rounded-lg mb-2 text-gray-700">
+              <NavLink
+                to="/SendMail/mail-send"
+                exact="true"
+                className={
+                  location !== "/SendMail/mail-send"
+                    ? "flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
+                    : "flex items-center gap-4 text-sm font-light px-4 py-3 rounded-lg bg-gradient-to-tr from-[#000000] to-[#090909] text-white shadow-md"
+                }
+              >
+                <EmailIcon size="2xl" />
+                SendMail
+              </NavLink>
+            </li>
+            )
+              }
 
               <li className="rounded-lg mb-2 text-gray-700">
                 <NavLink

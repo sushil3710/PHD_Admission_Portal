@@ -88,6 +88,10 @@ CREATE TABLE admins(
   admin_type INT NOT NULL,
   department TEXT[]
 );
+CREATE TABLE excels(
+  name TEXT, 
+  file_url TEXT
+);
 -- 0 for super-admin, 1 for faculty-admins, 2 for applicant, 3 for Staff
 
 CREATE OR REPLACE FUNCTION insert_into_login_verification()

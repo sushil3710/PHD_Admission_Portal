@@ -28,6 +28,7 @@ import OfferingList from "./components/Admin/OfferingList";
 import ApplicantList from "./components/Admin/ApplicationList";
 import ViewSubmittedApplicationAdmin from "./components/Admin/ViewSubmittedApplicationAdmin";
 import ManageAdmins from "./components/Admin/ManageAdmins";
+import SendMail from "./components/Admin/SendMail";
 import WithNavbarAndSidebar from "./components/Admin/WithNavbarAndSidebar";
 import AdminProfile from "./components/Admin/AdminProfile";
 import Templates from "./components/Admin/Templates";
@@ -169,6 +170,18 @@ function App() {
                 <ManageAdmins />
               </PrivateRoute>
             }
+          
+          />
+
+          
+<Route
+            path="/SendMail/mail-send/"
+            element={
+              <PrivateRoute>
+                <SendMail />
+              </PrivateRoute>
+            }
+          
           />
 
           <Route

@@ -1,8 +1,24 @@
 const pool = require("./db");
+const fs = require("fs");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+const path = require("path");
+
+const upDir = path.join(__dirname, 'public');
+if (!fs.existsSync(upDir)) {
+  fs.mkdirSync(upDir);
+  console.log(upDir);
+}
+
+
+const upDir2 = path.join(__dirname, 'public','MtechAdmissions');
+if (!fs.existsSync(upDir2)) {
+  fs.mkdirSync(upDir2);
+  console.log(upDir2);
+}
+
 
 dotenv.config();
 /** Add admission cycle and make it the current cycle */
@@ -1154,6 +1170,153 @@ const delete_application = async (req, res) => {
   return res.send("Ok");
 };
 
+const add_excel = async (req, res) => {
+  console.log("herae")
+  /**
+   * 1. Perform jwt authentication
+   * 2. Add admin (before that check that no other admin has already this id)
+   */
+
+  /**
+   * Verify using authToken
+   */
+  const uploadDir = path.join(__dirname, 'public', 'MtechAdmissions', 'ExcelFiles');
+  if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+  }
+  authToken = req.headers.authorization;
+  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+
+  var verified = null;
+
+  try {
+    verified = jwt.verify(authToken, jwtSecretKey);
+  } catch (error) {
+    return res.send("1"); /** Error, logout on user side */
+  }
+
+  if (!verified) {
+    return res.send("1"); /** Error, logout on user side */
+  }
+
+  /** Get role */
+  var userRole = jwt.decode(authToken).userRole;
+  if (userRole !== 0) {
+    return res.send("1");
+  }
+
+  let info = req.body;
+  let f=Object.values(req.files);
+
+    const filename = info.file+"_"+Date.now();
+    const filepath = path.join(uploadDir, filename);
+
+  
+    promises.push(
+      new Promise((resolve, reject) => {
+        fs.writeFile(filepath, f[0].buffer, async (err) => {
+          if (err) {
+            f[0].localStorageError = err;
+            next(err);
+            console.log(err);
+            reject(err);
+            return;
+          }
+          url = format(
+            `${process.env.STORAGE_BASE_URL}/MtechAdmissions/ExcelFiles/${filename}`);
+
+             await pool.query(
+              "Insert into excels(name, file_url) values($1,$2);",
+                [info.file,url]);
+          
+          //resolve();
+          return res.send("Ok");
+        });
+      })
+    );
+  
+    return res.send("Ok");
+  
+};
+
+const get_excel = async (req, res) => {
+  console.log("herae")
+  /**
+   * 1. Perform jwt auth
+   * 2. Return all the admins (except this one, so that he cannot delete himself)
+   */
+
+  /**
+   * Verify using authToken
+   */
+  authToken = req.headers.authorization;
+  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+
+  var verified = null;
+
+  try {
+    verified = jwt.verify(authToken, jwtSecretKey);
+  } catch (error) {
+    return res.send("1"); /** Error, logout on user side */
+  }
+
+  if (!verified) {
+    return res.send("1"); /** Error, logout on user side */
+  }
+
+  /** Get role */
+  var userRole = jwt.decode(authToken).userRole;
+  if (userRole !== 0) {
+    return res.send("1");
+  }
+
+  /** Get email */
+  var email = jwt.decode(authToken).userEmail;
+
+  const results = await pool.query(
+    "SELECT * from excels;"
+  );
+
+  return res.send(results.rows);
+};
+
+const send_mail = async (req, res) => {
+  const url = req.body.url;
+
+  if (url === "") return res.send("0");
+
+  const workbook = await XLSX.readFile(url);
+  const sheet_name = workbook.SheetNames[0];
+  const worksheet = workbook.Sheets[sheet_name];
+  const emailColumn = "Email_ID";
+  const emailAddresses = XLSX.utils.sheet_to_json(worksheet)
+    .filter(row => row[emailColumn])
+    .map(row => row[emailColumn]);
+
+  const filePath = path.join(__dirname, "cnf_email.html");
+  const html = fs.readFileSync(filePath, "utf-8").toString();
+  const template = handlebars.compile(html);
+  
+
+  // const replacements = {
+  //   VERIFICATION_CODE: otp,
+  // };
+  const htmlToSend = template();
+
+  const mailOptions = {
+    from: "IIT Ropar",
+    to: "",
+    subject: "Call letter for PhD interview at IIT Ropar",
+    html: htmlToSend,
+  };
+
+  for (const emailAddress of emailAddresses) {
+    mailOptions.to = emailAddress;
+  }
+
+  return res.send("2");
+};
+
 module.exports = {
   add_admission_cycle,
   get_admission_cycles,
@@ -1177,4 +1340,7 @@ module.exports = {
   delete_application,
   open_all_offerings,
   close_all_offerings,
+  add_excel,
+  get_excel,
+  send_mail,
 };
