@@ -52,11 +52,11 @@ export default function SendMailModal() {
   };
 
 
-  const HandleSubmit = (data) => {
+  const onSubmit = (event) => {
+    event.preventDefault();
     setIsLoading(true);
     const formData = new FormData();
-  
-    formData.append("file", excelFile);
+    formData.append("excelfile", excelFile);
   
 
       Axios.post("/add-excel", formData, {
@@ -139,7 +139,7 @@ export default function SendMailModal() {
                 </button>
 
               </div>
-              <form onSubmit={HandleSubmit}>
+              <form onSubmit={onSubmit} >
               <div className="px-6 pt-6 pb-2 space-y-6">
               <div className="bg-white rounded-lg shadow-lg p-8">
          <h3 className="text-2xl font-bold text-gray-900 mb-4 text-center">Upload Excel file</h3>
@@ -148,18 +148,16 @@ export default function SendMailModal() {
          <input
   type="file"
   accept=".xlsx, .xls"
-  name="excel_file" // add the name attribute
+  id="excelFile"
+  name="excelFile" // add the name attribute
   onChange={(event) => setExcelFile(event.target.files[0])} // add the onChange event handler
-  {...register("excel_file")} // register the field with react-hook-form
   className="block w-full p-2 text-sm border border-gray-300 rounded-md"
-  value={undefined} // set the value attribute to undefined
 />
                   <div className="p-3 border-t border-gray-200 rounded-b">
                     {!isLoading ? (
                       <button
                         className="text-white focus:outline-none block w-30 h-15 bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm text-center"
                         type="submit"
-                       
                       >
                         <div className="w-20 h-5 mx-5 my-2.5">
                           <p>Upload</p>

@@ -1172,6 +1172,7 @@ const delete_application = async (req, res) => {
 
 const add_excel = async (req, res) => {
   console.log("herae")
+
   /**
    * 1. Perform jwt authentication
    * 2. Add admin (before that check that no other admin has already this id)
@@ -1208,7 +1209,7 @@ const add_excel = async (req, res) => {
   let info = req.body;
   let f=Object.values(req.files);
 
-    const filename = info.file+"_"+Date.now();
+    const filename = info.excelfile+"_"+Date.now();
     const filepath = path.join(uploadDir, filename);
 
   
@@ -1281,7 +1282,7 @@ const get_excel = async (req, res) => {
 };
 
 const send_mail = async (req, res) => {
-  const url = req.body.url;
+  const url = req.body.fileurl;
 
   if (url === "") return res.send("0");
 
@@ -1298,9 +1299,6 @@ const send_mail = async (req, res) => {
   const template = handlebars.compile(html);
   
 
-  // const replacements = {
-  //   VERIFICATION_CODE: otp,
-  // };
   const htmlToSend = template();
 
   const mailOptions = {

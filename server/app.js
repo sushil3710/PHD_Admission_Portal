@@ -172,7 +172,7 @@ app.post(
 );
 
 app.post("/add-admin", upload.fields([]), admindB.add_admin);
-app.post("/add-excel",upload.fields([{ name: "file", maxCount: 1 }]), admindB.add_excel);
+app.post("/add-excel",upload.fields([{ name: "excelfile", maxCount: 1 }]), admindB.add_excel);
 app.post("/send-mail", admindB.send_mail);
 
 app.post("/edit-admin", upload.fields([]), admindB.edit_admin);

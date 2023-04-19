@@ -23,9 +23,29 @@ export default function SendMail() {
   }
 
 
+  useEffect(() => {
+    Axios.get("/get-excel", {
+      headers: {
+        Authorization: getToken(),
+      },
+    })
+      .then((response) => {
+        if (response.data === 1) {
+          navigate("/logout");
+        } else {
+          setExcelList(response.data);
+          setIsFetching(false);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
  
-  const SendMail= () => {
+  const SendMail= (fileurl) => {
+    const formData = new FormData();
+  
+  
+    formData.append("fileurl", fileurl);
     useEffect(() => {Axios.post("/send-mail", {
         headers: {
           Authorization: getToken(),
@@ -48,22 +68,6 @@ export default function SendMail() {
     }, []);
   }
 
-  useEffect(() => {
-    Axios.get("/get-excel", {
-      headers: {
-        Authorization: getToken(),
-      },
-    })
-      .then((response) => {
-        if (response.data === 1) {
-          navigate("/logout");
-        } else {
-          setExcelList(response.data);
-          setIsFetching(false);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
   return (
     <div className="p-10 bg-gray-100">
