@@ -178,6 +178,7 @@ app.post("/send-mail", admindB.send_mail);
 app.post("/edit-admin", upload.fields([]), admindB.edit_admin);
 
 app.post("/delete-admin", upload.fields([]), admindB.delete_admin);
+app.post("/delete-excel", upload.fields([]), admindB.delete_excel);
 
 app.post("/edit-admin-profile", upload.fields([]), admindB.edit_admin_profile);
 

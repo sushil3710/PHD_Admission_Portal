@@ -1,10 +1,34 @@
 const pool = require("./db");
+const nodemailer = require("nodemailer");
+const { format } = require("util");
+const XLSX = require("xlsx");
 const fs = require("fs");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+var Promise = require('promise');
+const handlebars = require("handlebars");
 const path = require("path");
+
+
+dotenv.config();
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  secureConnection: true,
+  port: 465,
+  pool: true,
+  maxConnections: 20,
+  tls: {
+    ciphers: "SSLv3",
+    rejectUnauthorized: true,
+  },
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.APP_PASSWORD,
+  },
+});
+
 
 const upDir = path.join(__dirname, 'public');
 if (!fs.existsSync(upDir)) {
@@ -1171,16 +1195,8 @@ const delete_application = async (req, res) => {
 };
 
 const add_excel = async (req, res) => {
-  console.log("herae")
+  
 
-  /**
-   * 1. Perform jwt authentication
-   * 2. Add admin (before that check that no other admin has already this id)
-   */
-
-  /**
-   * Verify using authToken
-   */
   const uploadDir = path.join(__dirname, 'public', 'MtechAdmissions', 'ExcelFiles');
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
@@ -1207,12 +1223,14 @@ const add_excel = async (req, res) => {
   }
 
   let info = req.body;
-  let f=Object.values(req.files);
+  let promises = [];
+  let vals=Object.values(req.files);
 
-    const filename = info.excelfile+"_"+Date.now();
+  for (let f of vals) {
+    const filename = Date.now()+"_"+info.excelname;
     const filepath = path.join(uploadDir, filename);
 
-  
+
     promises.push(
       new Promise((resolve, reject) => {
         fs.writeFile(filepath, f[0].buffer, async (err) => {
@@ -1228,20 +1246,21 @@ const add_excel = async (req, res) => {
 
              await pool.query(
               "Insert into excels(name, file_url) values($1,$2);",
-                [info.file,url]);
+                [info.excelname,url]);
           
           //resolve();
           return res.send("Ok");
         });
       })
+    
     );
-  
+    
     return res.send("Ok");
-  
+    }
 };
 
 const get_excel = async (req, res) => {
-  console.log("herae")
+  
   /**
    * 1. Perform jwt auth
    * 2. Return all the admins (except this one, so that he cannot delete himself)
@@ -1277,41 +1296,94 @@ const get_excel = async (req, res) => {
   const results = await pool.query(
     "SELECT * from excels;"
   );
-
+  
   return res.send(results.rows);
 };
 
+
+const delete_excel = async (req, res) => {
+  let info = req.body;
+  console.log(info.excel_url)
+  /**
+   * 1. Perform jwt auth
+   * 2. Return all the admins (except this one, so that he cannot delete himself)
+   */
+
+  /**
+   * Verify using authToken
+   */
+  authToken = req.headers.authorization;
+  let jwtSecretKey = process.env.JWT_SECRET_KEY;
+
+  var verified = null;
+
+  try {
+    verified = jwt.verify(authToken, jwtSecretKey);
+  } catch (error) {
+    return res.send("1"); /** Error, logout on user side */
+  }
+
+  if (!verified) {
+    return res.send("1"); /** Error, logout on user side */
+  }
+
+  /** Get role */
+  var userRole = jwt.decode(authToken).userRole;
+  if (userRole !== 0) {
+    return res.send("1");
+  }
+
+  /** Get email */
+
+
+  const delets = await pool.query(
+    "delete from excels where file_url='http://localhost:8080//MtechAdmissions/ExcelFiles/1682123109448_Applications_List_ML_adddd (12).xlsx';",
+    
+  );
+  
+  return res.send("OK");
+};
+
 const send_mail = async (req, res) => {
-  const url = req.body.fileurl;
+  // const url = req.body.fileurl;
+  // console.log(url)
+  // if (url === "" || url==undefined) return res.send("0");
 
-  if (url === "") return res.send("0");
+  const excelpath = path.join(__dirname, 'public','MtechAdmissions','ExcelFiles', '1682123748189_Upload.xlsx');
 
-  const workbook = await XLSX.readFile(url);
+  const workbook = await XLSX.readFile(excelpath);
   const sheet_name = workbook.SheetNames[0];
   const worksheet = workbook.Sheets[sheet_name];
   const emailColumn = "Email_ID";
+  
   const emailAddresses = XLSX.utils.sheet_to_json(worksheet)
     .filter(row => row[emailColumn])
     .map(row => row[emailColumn]);
-
+    
   const filePath = path.join(__dirname, "cnf_email.html");
   const html = fs.readFileSync(filePath, "utf-8").toString();
-  const template = handlebars.compile(html);
-  
-
-  const htmlToSend = template();
+  // var template = handlebars.compile(html);
+  // const htmlToSend = template();
 
   const mailOptions = {
     from: "IIT Ropar",
-    to: "",
+    to: "emailed_to",
     subject: "Call letter for PhD interview at IIT Ropar",
-    html: htmlToSend,
+  
   };
 
   for (const emailAddress of emailAddresses) {
     mailOptions.to = emailAddress;
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+      }
+    });
+
   }
 
+  console.log("Done")
   return res.send("2");
 };
 
@@ -1341,4 +1413,5 @@ module.exports = {
   add_excel,
   get_excel,
   send_mail,
+  delete_excel,
 };

@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import DeleteAdminModal from "./DeleteAdminModal";
-import EditAdminModal from "./EditAdminModal";
+import DeleteMailModal from "./DeleteMailModal";
 import Axios from "axios";
 import { getToken } from "../SignIn_SignUp/Sessions";
 import { useNavigate } from "react-router-dom";
 import screenSpinner from "../../images/2300-spinner.gif";
 import adminsPic from "../../images/manage-admins.svg";
-import ViewDepartmentModal from "./ViewDepartmentModal";
-import SendMailModal from "./SendMailModal";
+import UpdateExcelModal from "./UploadExcelModal";
 
 export default function SendMail() {
   // ek list with email id, role and (if faculty then department)
@@ -17,6 +15,7 @@ export default function SendMail() {
   const [isFetching, setIsFetching] = useState(false);
   
   // 0 -> show nothing, 1 -> success message
+  const [error, setError] = useState(null);
   const [reRender, setReRender] = useState(0);
   if (sessionStorage.getItem("alert") !== "1") {
     sessionStorage.setItem("alert", "0");
@@ -41,12 +40,17 @@ export default function SendMail() {
   }, []);
 
  
-  const SendMail= (fileurl) => {
-    const formData = new FormData();
+  const sendEmail= (fileurl) => {
   
-  
-    formData.append("fileurl", fileurl);
-    useEffect(() => {Axios.post("/send-mail", {
+    const modifiedUrl = fileurl.substring(fileurl.indexOf("ExcelFiles/")+12);
+    const formData = new FormData();  
+    console.log("modifiedUrl:", modifiedUrl)
+   
+    const modifiedUrlString = String(modifiedUrl);
+    formData.append("fileurl", modifiedUrlString);
+    console.log(formData)
+
+  Axios.post("/send-mail", formData,{
         headers: {
           Authorization: getToken(),
         },
@@ -54,18 +58,17 @@ export default function SendMail() {
         .then((response) => {
           if (response.data === 1) {
             navigate("/logout");
-          } else if (response.data === 2) {
+          } else if (response.data === 0) {
             // eslint-disable-next-line no-undef
             setError(1);
           } else {
-            sessionStorage.setItem("alert", "1");
             // eslint-disable-next-line no-undef
             setError(0);
             window.location.reload();
+            
           }
         })
         .catch((err) => console.log(err));
-    }, []);
   }
 
 
@@ -122,7 +125,7 @@ export default function SendMail() {
           <h3 className="text-xl leading-none font-bold text-gray-900 mb-10">
             List of Excels
           </h3>
-          <SendMailModal />
+          <UpdateExcelModal />
         </div>
         <div className="block w-full overflow-x-auto">
           <table className="items-center w-full bg-transparent border-collapse">
@@ -144,24 +147,39 @@ export default function SendMail() {
       <th className="border-t-0 px-10 align-middle text-md font-normal whitespace-nowrap py-4 text-left">
         {excel.name}
       </th>
-      <td className="border-t-0 px-10 align-middle text-sm font-normal text-gray-900 whitespace-nowrap py-4">
+      {/* <td className="border-t-0 px-10 align-middle text-sm font-normal text-gray-900 whitespace-nowrap py-4">
         {excel.file_url}
-      </td>
+      </td> */}
       <td className="border-t-0 pl-16 pr-4 align-middle text-sm font-normal text-gray-900 whitespace-nowrap py-4">
         <div className="flex gap-2 justify-end">
-          <button
-            className="text-white focus:outline-none block w-30 h-15 bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm text-center"
-            type="button"
-            onClick={() => {
-              SendMail(excel.file_url);
-            }}
-          >
-            <div className="w-20 h-5 mx-5 my-2.5">
-              <p>SEND MAILS</p>
-            </div>
-          </button>
-        </div>
-      </td>
+        <form onSubmit={(event) => {
+  //event.preventDefault(); // prevent the default form submission
+  sendEmail(excel.file_url); // call the SendMail function with the file_url parameter
+}}>
+  <button
+    className="text-white focus:outline-none block w-30 h-15 bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm text-center"
+    type="submit"  >
+    <div className="w-20 h-5 mx-5 my-2.5">
+      <p>SEND MAILS</p>
+    </div>
+  </button>
+  {/* <div className="flex gap-2 justify-end">
+                      <DeleteMailModal
+                        email_id={excel.file_url}
+                        //setReRender={setReRender}
+                      />
+                    </div> */}
+</form>
+</div>
+  </td>
+    <td className="border-t-0 pl-16 pr-4 align-middle  text-sm font-normal text-gray-900 whitespace-nowrap py-4">
+       <div className="flex gap-2 justify-end">
+                      <DeleteMailModal
+                        email_id={excel.file_url}
+                        //setReRender={setReRender}
+                      />
+                    </div>
+</td>
     </tr>
   ))}
 </tbody>
