@@ -6,6 +6,7 @@ const fs = require("fs");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { exec } = require("child_process");
 const saltRounds = 10;
 var Promise = require('promise');
 const handlebars = require("handlebars");
@@ -33,14 +34,14 @@ const transporter = nodemailer.createTransport({
 const upDir = path.join(__dirname, 'public');
 if (!fs.existsSync(upDir)) {
   fs.mkdirSync(upDir);
-  console.log(upDir);
+  
 }
 
 
 const upDir2 = path.join(__dirname, 'public','MtechAdmissions');
 if (!fs.existsSync(upDir2)) {
   fs.mkdirSync(upDir2);
-  console.log(upDir2);
+ 
 }
 
 
@@ -1249,7 +1250,7 @@ const add_excel = async (req, res) => {
                 [info.excelname,url]);
           
           //resolve();
-          return res.send("Ok");
+       
         });
       })
     
@@ -1301,17 +1302,9 @@ const get_excel = async (req, res) => {
 };
 
 
-const delete_excel = async (req, res) => {
+const delete_excel = async(req, res) => {
   let info = req.body;
-  console.log(info.excel_url)
-  /**
-   * 1. Perform jwt auth
-   * 2. Return all the admins (except this one, so that he cannot delete himself)
-   */
 
-  /**
-   * Verify using authToken
-   */
   authToken = req.headers.authorization;
   let jwtSecretKey = process.env.JWT_SECRET_KEY;
 
@@ -1337,21 +1330,22 @@ const delete_excel = async (req, res) => {
 
 
   const delets = await pool.query(
-    "delete from excels where file_url='http://localhost:8080//MtechAdmissions/ExcelFiles/1682123109448_Applications_List_ML_adddd (12).xlsx';",
-    
+    "Delete from excels where file_url=$1;",
+    [info.excel_url]    
   );
   
   return res.send("OK");
 };
 
 const send_mail = async (req, res) => {
-  // const url = req.body.fileurl;
-  // console.log(url)
-  // if (url === "" || url==undefined) return res.send("0");
+  const url = req.body.fileurl;
 
-  const excelpath = path.join(__dirname, 'public','MtechAdmissions','ExcelFiles', '1682123748189_Upload.xlsx');
+  if (url === "" || url==undefined) return res.send("0");
+
+  const excelpath = path.join(__dirname,'public','MtechAdmissions','ExcelFiles',url);
 
   const workbook = await XLSX.readFile(excelpath);
+
   const sheet_name = workbook.SheetNames[0];
   const worksheet = workbook.Sheets[sheet_name];
   const emailColumn = "Email_ID";
@@ -1383,9 +1377,35 @@ const send_mail = async (req, res) => {
 
   }
 
-  console.log("Done")
+ 
   return res.send("2");
 };
+
+const view_mail = async (req, res) => {
+  const url = req.body.fileurl;
+
+  if (url === "" || url === undefined) return res.send("0");
+
+  const excelpath = path.join(
+    __dirname,
+    "public",
+    "MtechAdmissions",
+    "ExcelFiles",
+    url
+  );
+
+  exec(`start excel "${excelpath}"`, (error, stdout, stderr) => {
+    if (error) {
+      console.error(`exec error: ${error}`);
+      return res.send("0");
+    }
+   
+  });
+
+  return res.send("2");
+};
+
+
 
 module.exports = {
   add_admission_cycle,
@@ -1414,4 +1434,5 @@ module.exports = {
   get_excel,
   send_mail,
   delete_excel,
+  view_mail,
 };

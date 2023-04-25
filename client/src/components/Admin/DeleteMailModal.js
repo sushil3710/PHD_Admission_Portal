@@ -26,8 +26,8 @@ export default function DeleteMailModal(props) {
   const handleDelete = () => {
     setIsLoading(true);
     const formData = new FormData();
-    formData.append("excel_url", props.excel_url);
-   console.log(props.excel_url)
+    formData.append("excel_url", props.fileurl);
+
     Axios.post("/delete-excel", formData, {
       headers: {
         Authorization: getToken(),

@@ -173,7 +173,7 @@ app.post(
 
 app.post("/add-admin", upload.fields([]), admindB.add_admin);
 app.post("/add-excel",upload.fields([{ name: "excelfile", maxCount: 1 }]), admindB.add_excel);
-app.post("/send-mail", admindB.send_mail);
+app.post("/send-mail",upload.fields([]), admindB.send_mail);
 
 app.post("/edit-admin", upload.fields([]), admindB.edit_admin);
 
@@ -183,6 +183,7 @@ app.post("/delete-excel", upload.fields([]), admindB.delete_excel);
 app.post("/edit-admin-profile", upload.fields([]), admindB.edit_admin_profile);
 
 app.get("/get-admins", admindB.get_admins);
+app.post("/view-excel",upload.fields([]),admindB.view_mail);
 
 app.get("/get-excel", admindB.get_excel);
 
