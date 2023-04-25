@@ -1326,16 +1326,28 @@ const delete_excel = async(req, res) => {
     return res.send("1");
   }
 
-  /** Get email */
+  const fileUrl = info.excel_url;
+const startIndex = fileUrl.indexOf("ExcelFiles/") + "ExcelFiles/".length;
+const newString = fileUrl.substring(startIndex);
+  const filePath = path.join(__dirname,'public','MtechAdmissions','ExcelFiles',newString);
 
+  fs.unlink(filePath, (err) => {
 
-  const delets = await pool.query(
-    "Delete from excels where file_url=$1;",
-    [info.excel_url]    
-  );
-  
-  return res.send("OK");
+    // delete record from database
+    pool.query(
+      "DELETE FROM excels WHERE file_url=$1;",
+      [fileUrl],
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          return res.send("1");
+        }
+        return res.send("OK");
+      }
+    );
+  });
 };
+
 
 const send_mail = async (req, res) => {
   const url = req.body.fileurl;
