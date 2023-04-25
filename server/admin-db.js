@@ -1246,7 +1246,7 @@ const add_excel = async (req, res) => {
             `${process.env.STORAGE_BASE_URL}/MtechAdmissions/ExcelFiles/${filename}`);
 
              await pool.query(
-              "Insert into excels(name, file_url) values($1,$2);",
+              "Insert into excels(name, file_url,stat) values($1,$2,0);",
                 [info.excelname,url]);
           
           //resolve();
@@ -1377,7 +1377,14 @@ const send_mail = async (req, res) => {
 
   }
 
- 
+  const new_url = format(
+    `${process.env.STORAGE_BASE_URL}/MtechAdmissions/ExcelFiles/${url}`);
+
+
+ await pool.query(
+    "Update excels set stat=1 where file_url=$1;",
+    [new_url]    
+  );
   return res.send("2");
 };
 

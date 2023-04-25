@@ -90,7 +90,8 @@ CREATE TABLE admins(
 );
 CREATE TABLE excels(
   name TEXT, 
-  file_url TEXT
+  file_url TEXT,
+  stat INTEGER
 );
 -- 0 for super-admin, 1 for faculty-admins, 2 for applicant, 3 for Staff
 

@@ -44,13 +44,13 @@ export default function SendMail() {
   const sendEmail = (fileurl) => {
 
     const modifiedUrl = fileurl.substring(fileurl.indexOf("ExcelFiles/") + 11);
-    
+
     const formData = new FormData();
     // console.log("modifiedUrl:", modifiedUrl)
 
     const modifiedUrlString = String(modifiedUrl);
     formData.append("fileurl", modifiedUrlString);
-    formData.append("1","2");
+    formData.append("1", "2");
     console.log(formData)
     Axios.post("/send-mail", formData, {
       headers: {
@@ -75,12 +75,12 @@ export default function SendMail() {
   const ViewExcel = (fileurl) => {
 
     const modifiedUrl = fileurl.substring(fileurl.indexOf("ExcelFiles/") + 11);
-    
+
     const formData = new FormData();
- 
+
     const modifiedUrlString = String(modifiedUrl);
     formData.append("fileurl", modifiedUrlString);
-    formData.append("1","2");
+    formData.append("1", "2");
     console.log(formData)
     Axios.post("/view-excel", formData, {
       headers: {
@@ -181,52 +181,53 @@ export default function SendMail() {
                   <th className="border-t-0 px-10 align-middle text-md font-normal whitespace-nowrap py-4 text-left">
                     {excel.name}
                   </th>
-                  {/* <td className="border-t-0 px-10 align-middle text-sm font-normal text-gray-900 whitespace-nowrap py-4">
-        {excel.file_url}
-      </td> */}
+
                   <td className="border-t-0 pl-16 pr-4 align-middle text-sm font-normal text-gray-900 whitespace-nowrap py-4">
-<div className="flex gap-2 justify-end">
-<form onSubmit={(event) => {
-                       //event.preventDefault(); // prevent the default form submission
-  sendEmail(excel.file_url); // call the SendMail function with the file_url parameter
-}}>
-     
-  <button
-    className="text-white focus:outline-none block w-30 h-15 bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm text-center mr-2"
-    type="submit">
-    <div className="w-20 h-5 mx-5 my-2.5">
-      <p>SEND MAILS</p>
-    </div>
-  </button>
-
-   </form>
-   
-
-   <form onSubmit={(event) => {
-                       //event.preventDefault(); // prevent the default form submission
-  ViewExcel(excel.file_url); // call the SendMail function with the file_url parameter
-}}>
-     
-  <button
-    className="text-white focus:outline-none block w-20 h-15 bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm text-center mr-2"
-    type="submit">
-    <div className="w-15 h-5 mx-2 my-2.5">
-      <VisibilityIcon size="2xl"/>
-    </div>
-  </button>
-
-   </form>
-                    </div>
-
-                  </td>
-                  <td className="border-t-0 pl-16 pr-4 align-middle  text-sm font-normal text-gray-900 whitespace-nowrap py-4">
                     <div className="flex gap-2 justify-end">
+                      <form onSubmit={(event) => {
+                        //event.preventDefault(); // prevent the default form submission
+                        sendEmail(excel.file_url); // call the SendMail function with the file_url parameter
+                      }}>
+
+                        <button
+                          className={`text-white focus:outline-none block w-30 h-15 font-medium rounded-lg text-sm text-center mr-2 
+            ${excel.stat === 1 ? 'bg-purple-400 hover:bg-purple-500 focus:ring-4 focus:ring-red-200' : 'bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200'}`}
+                          type="submit">
+
+                          <div className="w-20 h-5 mx-5 my-2.5">
+                            <p>{excel.stat === 1 ? "RESEND" : "SEND MAILS"}</p>
+                          </div>
+                        </button>
+
+                      </form>
+
+
+                      <form onSubmit={(event) => {
+                        //event.preventDefault(); // prevent the default form submission
+                        ViewExcel(excel.file_url); // call the SendMail function with the file_url parameter
+                      }}>
+
+                        <button
+                          className="text-white focus:outline-none block w-20 h-15 bg-blue-400 hover:bg-blue-500 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm text-center mr-2"
+                          type="submit">
+                          <div className="w-15 h-5 mx-2 my-2.5">
+                            <VisibilityIcon size="2xl" />
+                          </div>
+                        </button>
+
+                      </form>
+                      <div className="flex gap-2 justify-end">
                       <DeleteMailModal
                         fileurl={excel.file_url}
-                      setReRender={setReRender}
+                        setReRender={setReRender}
                       />
                     </div>
+                    
+                    </div>
+
+        
                   </td>
+
                 </tr>
               ))}
             </tbody>
