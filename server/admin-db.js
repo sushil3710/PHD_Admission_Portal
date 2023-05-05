@@ -1360,34 +1360,72 @@ const send_mail = async (req, res) => {
 
   const sheet_name = workbook.SheetNames[0];
   const worksheet = workbook.Sheets[sheet_name];
+  const rows = XLSX.utils.sheet_to_json(worksheet);
+
   const emailColumn = "Email_ID";
+  const resultColumn = "Result";
+  const studentNameColumn = "Name";
+  const remarkColumn = "Remarks";
+
+const yesRows = rows.filter(row => row[emailColumn] && row[resultColumn].toUpperCase() === "YES");
+const noRows = rows.filter(row => row[emailColumn] && row[resultColumn].toUpperCase() === "NO");
   
   const emailAddresses = XLSX.utils.sheet_to_json(worksheet)
     .filter(row => row[emailColumn])
     .map(row => row[emailColumn]);
     
-  const filePath = path.join(__dirname, "cnf_email.html");
-  const html = fs.readFileSync(filePath, "utf-8").toString();
-  // var template = handlebars.compile(html);
-  // const htmlToSend = template();
 
-  const mailOptions = {
-    from: "IIT Ropar",
-    to: "emailed_to",
-    subject: "Call letter for PhD interview at IIT Ropar",
-  
+  // Send email for YES rows
+const yesHtml = fs.readFileSync(path.join(__dirname, "cnf_email.html"), "utf-8").toString();
+const yesTemplate = handlebars.compile(yesHtml);
+
+for (const row of yesRows) {
+  var replacements = {
+    NAME: row[studentNameColumn],
   };
+const htmlToSend = yesTemplate(replacements);
 
-  for (const emailAddress of emailAddresses) {
-    mailOptions.to = emailAddress;
+const mailOptions = {
+from: "IIT Ropar",
+to: row[emailColumn],
+subject: "Call letter for interview for PhD Programme at IIT Ropar in the Department of Computer Science and Engineering",
+html: htmlToSend,
+};
 
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      }
-    });
 
-  }
+transporter.sendMail(mailOptions, function (error, info) {
+if (error) {
+console.log(error);
+}
+});
+
+}
+
+  // Send email for NO rows
+const noHtml = fs.readFileSync(path.join(__dirname, "rej_email.html"), "utf-8").toString();
+const noTemplate = handlebars.compile(noHtml);
+
+for (const row of noRows) {
+  var replacements = {
+    NAME: row[studentNameColumn],
+    REASON: row[remarkColumn]
+  };
+const htmlToSend = noTemplate(replacements);
+
+const mailOptions = {
+from: "IIT Ropar",
+to: row[emailColumn],
+subject: "Application Status for PhD Programme at IIT Ropar in the Department of Computer Science and Engineering",
+html: htmlToSend,
+};
+
+
+transporter.sendMail(mailOptions, function (error, info) {
+if (error) {
+console.log(error);
+}
+});
+}
 
   const new_url = format(
     `${process.env.STORAGE_BASE_URL}/MtechAdmissions/ExcelFiles/${url}`);

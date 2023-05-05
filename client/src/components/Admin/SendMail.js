@@ -191,8 +191,10 @@ export default function SendMail() {
 
                         <button
                           className={`text-white focus:outline-none block w-30 h-15 font-medium rounded-lg text-sm text-center mr-2 
-            ${excel.stat === 1 ? 'bg-purple-400 hover:bg-purple-500 focus:ring-4 focus:ring-red-200' : 'bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200'}`}
-                          type="submit">
+                          ${excel.stat === 1 ? 'bg-purple-400 hover:bg-purple-500 focus:ring-4 focus:ring-red-200' : 'bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200'}`}
+                          type="submit"
+                          title={"Excel File must contain Fields:\nName\nEmail_ID\nResult(Yes or No)\nRemarks"}
+                          >
 
                           <div className="w-20 h-5 mx-5 my-2.5">
                             <p>{excel.stat === 1 ? "RESEND" : "SEND MAILS"}</p>
@@ -217,15 +219,15 @@ export default function SendMail() {
 
                       </form>
                       <div className="flex gap-2 justify-end">
-                      <DeleteMailModal
-                        fileurl={excel.file_url}
-                        setReRender={setReRender}
-                      />
-                    </div>
-                    
+                        <DeleteMailModal
+                          fileurl={excel.file_url}
+                          setReRender={setReRender}
+                        />
+                      </div>
+
                     </div>
 
-        
+
                   </td>
 
                 </tr>
