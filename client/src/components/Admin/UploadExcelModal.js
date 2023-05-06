@@ -58,7 +58,7 @@ export default function UploadExcelModal() {
     setIsLoading(true);
     const formData = new FormData();
     formData.append("excelfile", excelFile);
-    formData.append("excelname",excelFileName)
+    formData.append("excelname", excelFileName)
     console.log(formData)
 
 
@@ -93,7 +93,7 @@ export default function UploadExcelModal() {
         type="button"
         onClick={handleOpen}
         className="focus:outline-none text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center"
-        
+
       >
         <svg
           className="-ml-1 mr-2 h-6 w-6"
@@ -155,11 +155,49 @@ export default function UploadExcelModal() {
                       id="excelFile"
                       name="excelFile" // add the name attribute
                       // eslint-disable-next-line no-sequences
-                      onChange={(event) =>  { const file = event.target.files[0]; 
+                      onChange={(event) => {
+                        const file = event.target.files[0];
                         setExcelFile(file);
-                        setExcelFilename(file.name)}} // add the onChange event handler
+                        setExcelFilename(file.name)
+                      }} // add the onChange event handler
                       className="block w-full p-2 text-sm border border-gray-300 rounded-md"
                     />
+                    <div
+                      className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                      id="result_excel_desc"
+                    >
+                      <span className="font-semibold">
+                        Allowed file formats:
+                      </span>{" "}
+                      .xls, .xlsx
+                    </div>
+                    <div
+                      className="mt-1 text-sm text-gray-500 dark:text-gray-300"
+                      id="result_excel_desc"
+                    >
+                      <p>
+                        <span className="font-semibold">Note:</span> The
+                        uploaded excel file should necessarily contain the
+                        following fields, besides other fields(if any).
+                        Moreover the result can only have two options
+                        "Yes" or "No"{" "}
+                      </p>
+                      <p>
+                        <span className="font-semibold">Note:</span>{" "}
+                      </p>
+                      <ol>
+                        <li className="font-semibold italic">
+                          - Name
+                        </li>
+                        <li className="font-semibold italic">
+                          - Email_ID
+                        </li>
+                        <li className="font-semibold italic">- Result</li>
+                        <li className="font-semibold italic">
+                          - Remarks
+                        </li>
+                      </ol>
+                    </div>
                     <div className="p-3 border-t border-gray-200 rounded-b">
                       {!isLoading ? (
                         <button
@@ -170,6 +208,8 @@ export default function UploadExcelModal() {
                             <p>Upload</p>
                           </div>
                         </button>
+
+
                       ) : (
                         <button
                           className="text-white focus:outline-none block w-30 h-15 bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm text-center"
