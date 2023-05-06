@@ -180,7 +180,7 @@ export default function AddTemplateCard(props) {
             </div>
             <div>
               <label htmlFor="name" className="text-sm font-medium">
-                Name
+                Template Name
               </label>
               <div className="relative mt-1">
                 <input
@@ -230,7 +230,7 @@ export default function AddTemplateCard(props) {
                 className="mt-1 w-full p-3 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
               >
                 <option value="">- Select -</option>
-                {admin_type === "0" && <option value="GLOBAL">GLOBAL</option>}
+                {admin_type === "0" && <option value="GLOBAL">OTHERS</option>}
                 <option value="PERSONAL">PERSONAL</option>
               </select>
             </div>
