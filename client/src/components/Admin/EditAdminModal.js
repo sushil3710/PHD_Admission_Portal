@@ -94,9 +94,7 @@ export default function EditAdminModal(props) {
 
     let filteredOptions = [];
     if (adminType === 0) {
-      for (let i = 0; i < options.length; i++) {
-        filteredOptions.push(options[i].value);
-      }
+      filteredOptions.push(data.department);
     } else {
       for (let i = 0; i < selectedOptions.length; i++) {
         filteredOptions.push(selectedOptions[i].value);
