@@ -23,11 +23,26 @@ function Info() {
     <div className="min-h-screen">
       <div className="card w-9/12 sm:w-10/12 md:w-11/12 ml-14 my-2 bg-base-100 shadow-xl">
         <div className="card-body">
+          <h2 className="card-title">Research at IIT Ropar?</h2>
+          <p>
+          IIT Ropar puts immense emphasis on promoting cutting edge research and publications of high quality and not quantity.
+           We firmly believe that this is the key to our recognition in the international research community. 
+           We offer PhD degrees in all disciplines that we offer.
+            At present, we have 574 PhD scholars in the Institute. 
+           102 PhD scholars have successfully defended their thesis and 179 scholars have joined the PhD program during the last one year.
+
+          Over the last year, as many as 416 papers have been published in various high impact international journals. 
+          This has already placed us at the second position among 2nd generation IITs with the average publications per author (APPA) of 3.99; the average citation per paper (ACPP) of 22.45 and the H-Index of 62 (Scopus data - February 2020).
+          </p>
+        </div>
+      </div>
+      <div className="card w-9/12 sm:w-10/12 md:w-11/12 ml-14 my-2 bg-base-100 shadow-xl">
+        <div className="card-body">
           <h2 className="card-title">Shortlisiting Criteria and Shortlisted Students</h2>
-          <p>Here's this direct link to the page stating the shortlisiting criteria for the reserved candidates and their list: 
+          <p>Here's this direct link to the page stating the shortlisiting criteria for the candidates and their list: 
                 <a href="https://www.iitrpr.ac.in/phd-list-shortlisted-candidates" target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: "rgb(88 80 236)" }}> Link</a>
+                style={{ color: "rgb(88 80 236)" }}> https://www.iitrpr.ac.in/phd-list-shortlisted-candidates</a>
           </p>
         </div>
       </div>
