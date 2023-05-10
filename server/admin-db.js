@@ -1366,6 +1366,11 @@ const send_mail = async (req, res) => {
   const resultColumn = "Result";
   const studentNameColumn = "Name";
   const remarkColumn = "Remarks";
+  const applicationColumn = "Application_ID";
+
+  
+  const cycle = await pool.query("SELECT cycle_id from current_cycle;");
+  let cycle_id = cycle.rows[0].cycle_id;
 
 const yesRows = rows.filter(row => row[emailColumn] && row[resultColumn].toUpperCase() === "YES");
 const noRows = rows.filter(row => row[emailColumn] && row[resultColumn].toUpperCase() === "NO");
@@ -1380,8 +1385,19 @@ const yesHtml = fs.readFileSync(path.join(__dirname, "cnf_email.html"), "utf-8")
 const yesTemplate = handlebars.compile(yesHtml);
 
 for (const row of yesRows) {
+
+  const results = await pool.query(
+    "SELECT * FROM applications_" + cycle_id + " WHERE application_id=$1;",
+    [row[applicationColumn]]
+  );
+
   var replacements = {
     NAME: row[studentNameColumn],
+    APPLICATION_ID:results.rows[0].application_id,
+    OFFERING_ID:results.rows[0].offering_id,
+    DEPARTMENT:results.rows[0].department_name,
+    SPECIALIZATION: results.rows[0].specialization_name,
+    APPLYING_FOR:results.rows[0].applying_for
   };
 const htmlToSend = yesTemplate(replacements);
 
@@ -1406,10 +1422,22 @@ const noHtml = fs.readFileSync(path.join(__dirname, "rej_email.html"), "utf-8").
 const noTemplate = handlebars.compile(noHtml);
 
 for (const row of noRows) {
+
+  const results = await pool.query(
+    "SELECT * FROM applications_" + cycle_id + " WHERE application_id=$1;",
+    [row[applicationColumn]]
+  );
+
   var replacements = {
     NAME: row[studentNameColumn],
-    REASON: row[remarkColumn]
+    REASON: row[remarkColumn],
+    APPLICATION_ID:results.rows[0].application_id,
+    OFFERING_ID:results.rows[0].offering_id,
+    DEPARTMENT:results.rows[0].department_name,
+    SPECIALIZATION: results.rows[0].specialization_name,
+    APPLYING_FOR:results.rows[0].applying_for
   };
+
 const htmlToSend = noTemplate(replacements);
 
 const mailOptions = {

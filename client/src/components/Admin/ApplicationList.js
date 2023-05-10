@@ -260,6 +260,12 @@ export default function OfferingList() {
               <table className="table-fixed min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-100">
                   <tr>
+                  <th
+                      scope="col"
+                      className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
+                    >
+                      Application ID
+                    </th>
                     <th
                       scope="col"
                       className="p-4 text-left text-xs font-medium text-gray-500 uppercase"
@@ -313,6 +319,11 @@ export default function OfferingList() {
                       ),
                     ].map((i) => (
                       <tr key={applications[i].application_id}>
+                               <td className="p-4 w-1/6 text-left text-sm text-gray-500 tracking-wider font-semibold">
+                          <div className="break-all">
+                            {applications[i].application_id}
+                          </div>
+                        </td>
                         <td className="p-4 w-1/6 text-left text-sm text-gray-500 tracking-wider font-semibold">
                           <div className="break-all">
                             {applications[i].full_name}
