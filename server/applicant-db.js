@@ -17,7 +17,7 @@ if (!fs.existsSync(upDir)) {
 }
 
 
-const uploadDir = path.join(__dirname, 'public', 'MtechAdmissions');
+const uploadDir = path.join(__dirname, 'public', 'PHDAdmissions');
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);
   console.log(uploadDir);
@@ -139,7 +139,7 @@ const save_education_details = async (req, res, next) => {
 
   let promises = [];
   let vals = Object.values(req.files);
-  const uploadDir = path.join(__dirname, 'public', 'MtechAdmissions', 'EDUCATION_Details');
+  const uploadDir = path.join(__dirname, 'public', 'PHDAdmissions', 'EDUCATION_Details');
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
   }
@@ -160,7 +160,7 @@ const save_education_details = async (req, res, next) => {
             return;
           }
           url = format(
-            `${process.env.STORAGE_BASE_URL}/MtechAdmissions/EDUCATION_Details/${filename}`
+            `${process.env.STORAGE_BASE_URL}/PHDAdmissions/EDUCATION_Details/${filename}`
           );
 
           if (f[0].fieldname === "marksheet_10th_url") {
@@ -255,7 +255,7 @@ const save_personal_info = async (req, res, next) => {
   let promises = [];
   let vals = Object.values(req.files);
 
-  const uploadDir = path.join(__dirname, 'public', 'MtechAdmissions', 'PERSONAL_Details');
+  const uploadDir = path.join(__dirname, 'public', 'PHDAdmissions', 'PERSONAL_Details');
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
   }
@@ -275,7 +275,7 @@ const save_personal_info = async (req, res, next) => {
             return;
           }
           url = format(
-            `${process.env.STORAGE_BASE_URL}/MtechAdmissions/PERSONAL_Details/${filename}`
+            `${process.env.STORAGE_BASE_URL}/PHDAdmissions/PERSONAL_Details/${filename}`
 
           );
           if (f[0].fieldname === "category_certificate") {
@@ -620,7 +620,7 @@ const save_application_info = async (req, res, next) => {
   let promises = [];
   let vals = Object.values(req.files);
 
-  const uploadDir = path.join(__dirname, 'public', 'MtechAdmissions', 'APPLICATION_Details');
+  const uploadDir = path.join(__dirname, 'public', 'PHDAdmissions', 'APPLICATION_Details');
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
   }
@@ -640,7 +640,7 @@ const save_application_info = async (req, res, next) => {
             return;
           }
           url = format(
-            `${process.env.STORAGE_BASE_URL}/MtechAdmissions/APPLICATION_Details/${filename}`
+            `${process.env.STORAGE_BASE_URL}/PHDAdmissions/APPLICATION_Details/${filename}`
 
           );
           if (f[0].fieldname === "transaction_slip") {
@@ -1145,7 +1145,7 @@ const reapply_save_application_info = async (req, res, next) => {
 
   let promises = [];
   let vals = Object.values(req.files);
-  const uploadDir = path.join(__dirname, 'public', 'MtechAdmissions', 'REAPPLY_Details');
+  const uploadDir = path.join(__dirname, 'public', 'PHDAdmissions', 'REAPPLY_Details');
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
   }
@@ -1165,7 +1165,7 @@ const reapply_save_application_info = async (req, res, next) => {
             return;
           }
           url = format(
-            `${process.env.STORAGE_BASE_URL}/MtechAdmissions/APPLICATION_Details/${filename}`
+            `${process.env.STORAGE_BASE_URL}/PHDAdmissions/APPLICATION_Details/${filename}`
 
           );
           if (f[0].fieldname === "transaction_slip") {

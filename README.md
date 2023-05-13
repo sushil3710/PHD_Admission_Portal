@@ -54,6 +54,9 @@
 * `PG_HOST` = `localhost`        ////  Keep it same as we are running locally   
 * `PG_PORT` = `5432`             ////  Keep it same 
 * `PG_DATABASE` = `phd`          ////  Keep it phd itself as we have created a separate database now.
+* `EMAIL` = `YOUR EMAIL FOR SENDING EMAILS/OTPs`
+* `APP_PASSWORD` = `Password for your email_app`
+
 
 #### 5. Now we will setup and run server side 
 * Open a new terminal and go into server directory.
