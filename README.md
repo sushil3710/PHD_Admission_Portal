@@ -2,16 +2,16 @@
 # Website-Portal-for-phd-admission
 
 ## Features 
-* Login/Signup for both admins and applicants for all hostels.
+* Login/Signup for both admins and applicants.
 * It offers an applicant to register into the portal, update his profile and apply into different offerings at IIT Ropar and provide a very smooth and user friendly experience in the application procedure.
-* It offers an admin can be the academic section, any faculty or any staff member to add admins, create an admission cycle, view and analysis different applications in an offering and send mails to applicants about their selection status.
+* It offers an admin can be the academic section, any faculty or any staff member to add admins, create an admission cycle, view and analysis of different applications in an offering and send mails to applicants about their selection status.
 
 ## User guide 
 
 ### How to use WebApp 
 * Please find the link of hosted website [phd-admission-portal](http://172.30.8.215:88/) .
 * By default the user will see a homepage where there options to signin or signup.
-* To login into the admin side use the email - `2020csb1118@iitrpr.ac.in` and password - `root`.
+* To login into the admin side use the email - `phdadmin@iitrpr.ac.in` and password - `root`.
 * To login into the student side,first register yourself into the portal and verify the OTP and set your password.
 
 ### How to build locally
@@ -41,7 +41,7 @@
 * Make sure you have the required version of postgres install.
 * Open the shell of your postgres in terminal
 * Create a new database named `phd`
-* Then connect to hostel database and copy paste the script present in the `database.sql` file into the phd psql shell.
+* Then connect to phd database and copy paste the script present in the `database.sql` file into the phd psql shell.
 * Once the database is created successfully, now we need to update the .env file in the server file/
 * Steps are :
 * 1. `CREATE DATABASE phd;`
